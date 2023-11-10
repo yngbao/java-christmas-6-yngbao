@@ -8,7 +8,7 @@ public enum Discount {
 	SPECIAL_DISCOUNT(1_000),
 	PRESENT_CRITERIA(120_000);
 	
-	private int amount;
+	private final int amount;
 
 	Discount(int amount) {
 		this.amount = amount;
@@ -22,5 +22,10 @@ public enum Discount {
 		int more = INCREASING.getAmount() * (date - Event.FIRST_DATE);
 		return BASIC_DISCOUNT.getAmount() + more;
 	}
+	
+	public static int getMenuDiscount(Menu menu) {
+		return menu.getPrice() - ANNUAL_DISCOUNT.getAmount();
+	}
+
 
 }

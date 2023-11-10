@@ -1,0 +1,26 @@
+package christmas.domain;
+
+public enum MenuType {
+	
+	APPETIZER("애피타이저", new Menu[] {Menu.MUSHROOM_SOUP, Menu.TAPAS, Menu.CAESAR_SALAD}),
+	MAIN("메인", new Menu[] {Menu.T_BONE_STEAK, Menu.BBQ_RIBS, Menu.SEAFOOD_PASTA, Menu.X_MAS_PASTA}),
+	DESSERT("디저트", new Menu[] {Menu.CHOCO_CAKE, Menu.ICECREAM}),
+	BEVERAGE("음료", new Menu[] {Menu.ZERO_COKE, Menu.RED_WINE, Menu.CHAMPAGNE});
+	
+	private final String viewName;
+	private final Menu[] containMenu;
+	
+	MenuType(String viewName, Menu[] containMenu){
+		this.viewName = viewName;
+		this.containMenu = containMenu;
+	}
+	
+	public String getViewName() {
+		return viewName;
+	}
+	
+	public Menu[] getContainMenu() {
+		return containMenu;
+	}
+
+}
