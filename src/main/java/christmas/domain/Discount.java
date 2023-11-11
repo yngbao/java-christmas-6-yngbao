@@ -30,6 +30,13 @@ public enum Discount {
 	public static int discountByMenu(Menu menu) {
 		return menu.getPrice() - ANNUAL_DISCOUNT.getAmount();
 	}
+	
+	public static int discountSpecially(int amount, boolean isSpecial) {
+		if (isSpecial) {
+			return amount - SPECIAL_DISCOUNT.getAmount();
+		}
+		return amount;
+	}
 
 
 }
