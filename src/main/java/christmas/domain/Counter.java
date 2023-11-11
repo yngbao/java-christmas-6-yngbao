@@ -1,5 +1,5 @@
 package christmas.domain;
 
-public class Restaurant {
+public class Counter {
 
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class DiscountTest {
 
-	@DisplayName("입력된 날짜 별 할인액을 총 금액에서 뺀다.")
+	@DisplayName("입력된 날짜 할인액에 해당하는 금액을 할인한다.")
 	@CsvSource(value = {"2:5000:3900", "12:5000:2900", "25:8000:4600"}, delimiter = ':')
     @ParameterizedTest
     void discountByDateTest(Integer date,Integer amount, Integer expected) {
@@ -29,7 +29,7 @@ class DiscountTest {
         assertThat(result2).isEqualTo(2977);
     }
 	
-	@DisplayName("특별할인 대상이면 총 주문금액에서 1000원을 할인한다.")
+	@DisplayName("특별할인 대상이면 1000원을 할인한다.")
 	@CsvSource(value = {"5000:false:5000", "15000:true:14000"}, delimiter = ':')
     @ParameterizedTest
     void discountSpeciallyTest(Integer amount,boolean isSpecial, Integer expected) {
