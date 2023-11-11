@@ -22,5 +22,12 @@ public enum MenuType {
 	public Menu[] getContainMenu() {
 		return containMenu;
 	}
+	
+	public MenuType findDiscountMenuType(boolean isWeekday) {
+		if(isWeekday) {
+			return DESSERT;
+		}
+		return MAIN;
+	}
 
 }
