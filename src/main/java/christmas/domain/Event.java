@@ -1,12 +1,22 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public class Event {
 	
-	public static final int MONTH = 12;
+	public static final int EVENT_MONTH = 12;
 	public static final int FIRST_DATE = 1;
 	public static final int X_MAS = 25;
 	public static final int END_DATE = 31;
+	private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
 	
-	
+	public boolean isSpecial(int date) {
+		boolean isSpecial = Arrays.stream(SPECIAL_DAY)
+				.anyMatch(day -> day == date);
+		if (isSpecial) {
+			return true;
+		}
+		return false;
+	}
 
 }
