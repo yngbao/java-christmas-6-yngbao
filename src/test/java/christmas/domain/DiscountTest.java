@@ -8,22 +8,22 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class DiscountTest {
 
-	@DisplayName("입력된 날짜 별 할인 금액을 구한다.")
-	@CsvSource(value = {"2:1100", "12:2100", "25:3400"}, delimiter = ':')
+	@DisplayName("입력된 날짜 별 할인액을 총 금액에서 뺀다.")
+	@CsvSource(value = {"2:5000:3900", "12:5000:2900", "25:8000:4600"}, delimiter = ':')
     @ParameterizedTest
-    void discountForDate(Integer date, Integer expected) {
-		int actualValue = Discount.getDateDiscount(date);
+    void discountByDate(Integer date,Integer amount, Integer expected) {
+		int actualValue = Discount.discountByDate(amount, date);
         assertThat(actualValue).isEqualTo(expected);
     }
 	
 	@DisplayName("할인 적용된 메뉴에서 2,023원을 할인한다.")
     @Test
-    void discountForMenu() {
+    void discountByMenu() {
         Menu case1 = Menu.BBQ_RIBS;
         Menu case2 = Menu.ICECREAM;
 
-        int result1 = Discount.getMenuDiscount(case1);
-        int result2 = Discount.getMenuDiscount(case2);
+        int result1 = Discount.discountByMenu(case1);
+        int result2 = Discount.discountByMenu(case2);
 
         assertThat(result1).isEqualTo(51977);
         assertThat(result2).isEqualTo(2977);

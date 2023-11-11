@@ -10,9 +10,9 @@ public class Event {
 	public static final int END_DATE = 31;
 	private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
 	
-	public boolean isSpecial(int date) {
+	public boolean isSpecial(int Inputdate) {
 		boolean isSpecial = Arrays.stream(SPECIAL_DAY)
-				.anyMatch(day -> day == date);
+				.anyMatch(day -> day == Inputdate);
 		if (isSpecial) {
 			return true;
 		}

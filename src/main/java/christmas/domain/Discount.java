@@ -18,12 +18,16 @@ public enum Discount {
 		return amount;
 	}
 	
-	public static int getDateDiscount(int date) {
+	public static int discountByDate(int amount, int date) {
+		return amount - getDateDiscount(date);
+	}
+	
+	private static int getDateDiscount(int date) {
 		int more = INCREASING.getAmount() * (date - Event.FIRST_DATE);
 		return BASIC_DISCOUNT.getAmount() + more;
 	}
 	
-	public static int getMenuDiscount(Menu menu) {
+	public static int discountByMenu(Menu menu) {
 		return menu.getPrice() - ANNUAL_DISCOUNT.getAmount();
 	}
 
