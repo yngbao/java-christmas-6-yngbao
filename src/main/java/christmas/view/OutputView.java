@@ -1,10 +1,6 @@
 package christmas.view;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import christmas.domain.Counter;
 import christmas.domain.Discount;
