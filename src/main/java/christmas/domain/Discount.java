@@ -16,19 +16,11 @@ public enum Discount {
 	
 	private final String viewName;
 	private final int amount;
-	private Map<Discount, Integer> discountResult = new HashMap<>();
+	private static Map<Discount, Integer> discountResult = new HashMap<>();
 
 	Discount(String viewName, int amount) {
 		this.viewName = viewName;
 		this.amount = amount;
-	}
-	
-	public void initDiscountResult() {
-		discountResult.put(X_MAS_DISCOUNT, DEFAULT.amount);
-		discountResult.put(WEEKDAY_DISCOUNT, DEFAULT.amount);
-		discountResult.put(WEEKEND_DISCOUNT, DEFAULT.amount);
-		discountResult.put(SPECIAL_DISCOUNT, DEFAULT.amount);
-		discountResult.put(PRESENT_AMOUNT, DEFAULT.amount);
 	}
 	
 	public String getViewName() {
@@ -39,7 +31,7 @@ public enum Discount {
 		return amount;
 	}
 	
-	public Map<Discount, Integer> getDiscountResult(){
+	public static Map<Discount, Integer> getDiscountResult(){
 		return discountResult;
 	}
 	
@@ -47,12 +39,12 @@ public enum Discount {
 		return amount - getDateDiscount(date);
 	}
 	
-	public static int discountOnWeekday(Menu menu) {
-		return menu.getPrice() - WEEKDAY_DISCOUNT.getAmount();
+	public static int getWeekdayDiscount(int count) {
+		return WEEKDAY_DISCOUNT.getAmount() * count;
 	}
 	
-	public static int discountOnWeekend(Menu menu) {
-		return menu.getPrice() - WEEKEND_DISCOUNT.getAmount();
+	public static int getWeekendDiscount(int count) {
+		return WEEKEND_DISCOUNT.getAmount() * count;
 	}
 	
 	public static int discountSpecially(int amount, boolean isSpecial) {

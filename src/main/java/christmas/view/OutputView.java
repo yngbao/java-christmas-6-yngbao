@@ -1,8 +1,13 @@
 package christmas.view;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import christmas.domain.Counter;
+import christmas.domain.Discount;
 import christmas.domain.Event;
 import christmas.domain.Menu;
 
@@ -34,6 +39,14 @@ public class OutputView {
 		System.out.println("\n<증정 메뉴>\n" + presentStatus);
 	}
 	
-	
+	public void printBenefitDetails() {
+		System.out.println("\n<혜택 내역>");
+		for(Discount discount : Discount.getDiscountResult().keySet()) {
+			System.out.println(discount.getViewName()+": -"+formatter.format(discount.getAmount()));
+		}
+		if (Discount.getDiscountResult().size() == 0 ) {
+			System.out.println("없음");
+		}
+	}
 
 }

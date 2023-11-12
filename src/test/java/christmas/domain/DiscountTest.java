@@ -16,17 +16,17 @@ class DiscountTest {
         assertThat(actualValue).isEqualTo(expected);
     }
 	
-	@DisplayName("할인 적용된 메뉴에서 2,023원을 할인한다.")
+	@DisplayName("할인 적용된 메뉴수만큼 2,023원씩 총 메뉴 할인액을 구한다.")
     @Test
     void discountByMenuTest() {
-        Menu case1 = Menu.BBQ_RIBS;
-        Menu case2 = Menu.ICECREAM;
+        int case1 = 1;
+        int case2 = 3;
 
-        int result1 = Discount.discountOnWeekday(case1);
-        int result2 = Discount.discountOnWeekday(case2);
+        int result1 = Discount.getWeekdayDiscount(case1);
+        int result2 = Discount.getWeekdayDiscount(case2);
 
-        assertThat(result1).isEqualTo(51977);
-        assertThat(result2).isEqualTo(2977);
+        assertThat(result1).isEqualTo(2023);
+        assertThat(result2).isEqualTo(6069);
     }
 	
 	@DisplayName("특별할인 대상이면 1000원을 할인한다.")
