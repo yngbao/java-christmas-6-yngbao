@@ -35,23 +35,22 @@ public enum Discount {
 		return discountResult;
 	}
 	
-	public static int discountByDate(int amount, int date) {
-		return amount - getDateDiscount(date);
+	public static void discountByDate(int date) {
+		discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
 	}
 	
-	public static int getWeekdayDiscount(int count) {
-		return WEEKDAY_DISCOUNT.getAmount() * count;
+	public static void getWeekdayDiscount(int count) {
+		discountResult.put(WEEKDAY_DISCOUNT, WEEKDAY_DISCOUNT.getAmount() * count);
 	}
 	
-	public static int getWeekendDiscount(int count) {
-		return WEEKEND_DISCOUNT.getAmount() * count;
+	public static void getWeekendDiscount(int count) {
+		discountResult.put(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT.getAmount() * count);
 	}
 	
-	public static int discountSpecially(int amount, boolean isSpecial) {
+	public static void discountSpecially(boolean isSpecial) {
 		if (isSpecial) {
-			return amount - SPECIAL_DISCOUNT.getAmount();
+			discountResult.put(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getAmount());
 		}
-		return amount;
 	}
 
 	private static int getDateDiscount(int date) {
