@@ -23,7 +23,7 @@ public enum Menu {
 		this.price = price;
 	}
 	
-	public String getViewNameName() {
+	public String getViewName() {
 		return viewName;
 	}
 	
