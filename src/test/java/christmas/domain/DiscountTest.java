@@ -22,8 +22,8 @@ class DiscountTest {
         Menu case1 = Menu.BBQ_RIBS;
         Menu case2 = Menu.ICECREAM;
 
-        int result1 = Discount.discountByMenu(case1);
-        int result2 = Discount.discountByMenu(case2);
+        int result1 = Discount.discountOnWeekday(case1);
+        int result2 = Discount.discountOnWeekday(case2);
 
         assertThat(result1).isEqualTo(51977);
         assertThat(result2).isEqualTo(2977);

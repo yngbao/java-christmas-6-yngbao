@@ -29,5 +29,11 @@ public class OutputView {
 		System.out.println("\n<할인 전 총주문 금액>\n"
 				+formatter.format(Counter.getTotalOrderAmount()));
 	}
+	
+	public void printPresentMenu(String presentStatus) {
+		System.out.println("\n<증정 메뉴>\n" + presentStatus);
+	}
+	
+	
 
 }
