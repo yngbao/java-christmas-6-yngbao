@@ -5,9 +5,9 @@ import java.util.List;
 public class Customer {
 	
 	private final int date;
-	private final List<String> orders;
+	private final List<String[]> orders;
 	
-	Customer(int date, List<String> orders) {
+	Customer(int date, List<String[]> orders) {
 		this.date = date;
 		this.orders = orders;
 	}
@@ -16,7 +16,7 @@ public class Customer {
 		return date;
 	}
 	
-	public List<String> getOrders() {
+	public List<String[]> getOrders() {
 		return orders;
 	}
 

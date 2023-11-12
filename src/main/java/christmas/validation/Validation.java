@@ -1,6 +1,17 @@
 package christmas.validation;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import christmas.domain.Menu;
+
 public class Validation {
+	
+	private static final int MENU_INDEX = 0;
+	private static final int COUNT_INDEX = 1;
+	private static final int MIN_ORDER_COUNT = 1;
 	
 	public void validateInputs(String[] inputs) {
 		for(String input : inputs)
@@ -8,5 +19,32 @@ public class Validation {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public void validateOrderMenu(List<String[]> splitedInputs) {  //메뉴판에 없는 메뉴일 경우 예외처리
+        for (String[] splitedInput : splitedInputs) {
+        	if(Arrays.stream(Menu.values()).anyMatch(menu -> menu.getViewName() == splitedInput[MENU_INDEX])) {
+        		throw new IllegalArgumentException();
+        	}
+        }
+	}
+	
+	public void validateOrderCount(List<String[]> splitedInputs) {
+        for (String[] splitedInput : splitedInputs) {
+        	if(Integer.valueOf(splitedInput[COUNT_INDEX]) < MIN_ORDER_COUNT) {
+        		throw new IllegalArgumentException();
+        	}
+        }
+	}
+	
+	public void validateDistinctOrder(List<String[]> splitedInputs) {
+		Set<String> menuInput = new HashSet<>();
+		for (String[] splitedInput : splitedInputs) {
+			menuInput.add(splitedInput[MENU_INDEX]);
+		}
+		if(menuInput.size() != splitedInputs.size()) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
 
 }
