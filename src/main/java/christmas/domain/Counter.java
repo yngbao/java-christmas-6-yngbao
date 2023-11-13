@@ -24,6 +24,14 @@ public class Counter {
 		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
 	}
 	
+	public static int howManyOrderedMenu() {
+		int count = 0;
+		for(Menu menu : orders.keySet()) {
+			count += orders.get(menu);
+		}
+		return count;
+	}
+	
 	public static List<MenuType> findOrderedMenuType(){
 		return ordersType.entrySet().stream()
 				.filter(entry -> entry.getValue() != 0)

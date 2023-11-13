@@ -19,6 +19,7 @@ public class Validation {
 	private static final int MAX_ORDER_COUNT = 20;
 	private static final int INDEX_ZERO = 0;
 	
+	
 	public static void validateNotOnlyBeverage() {
 		List<MenuType> orderedMenuType = Counter.findOrderedMenuType();
 		if (orderedMenuType.size() == COUNT_ONE && orderedMenuType.get(INDEX_ZERO) == MenuType.BEVERAGE) {
@@ -65,11 +66,8 @@ public class Validation {
 		}
 	}
 	
-	public static void validateTotalMenuCount(Map<Menu, Integer> orders) {
-		int count = 0;
-		for (Menu menu : orders.keySet()) {
-			count += orders.get(menu);
-		}
+	public static void validateTotalMenuCount() {
+		int count = Counter.howManyOrderedMenu();
 		if(count > MAX_ORDER_COUNT) {
 			throw new IllegalArgumentException();
 		}
