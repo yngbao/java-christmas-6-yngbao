@@ -48,6 +48,17 @@ public class Service {
 		Benefit.checkBeneficial(counter.isEnoughForEvent());
 	}
 	
+	public void showEventOrderResults() {
+		OutputView.printPreviewIntro(customer.getDate());
+		OutputView.printOrders(counter.getOrders());
+		OutputView.printTotalOrderAmount(counter.getTotalOrderAmount());
+		OutputView.printPresentMenu(counter.isSatisfiedForPresent());
+		OutputView.printBenefitDetails();
+		OutputView.printTotalDiscountAmount();
+		OutputView.printAmountForPayment(counter.howMuchForPayment());
+		OutputView.printBadge(customer.getBadge());
+	}
+	
 	private void validateInputMenuType() {
 		while(true) {
 			try {
