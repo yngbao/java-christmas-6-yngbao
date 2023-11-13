@@ -27,7 +27,7 @@ public enum Menu {
 	
 	public static Menu findMenu(String inputMenu) {
 		return Arrays.stream(Menu.values())
-				.filter(menu -> menu.getViewName() == inputMenu)
+				.filter(menu -> menu.getViewName().equals(inputMenu))
 				.findAny().get();
 	}
 	

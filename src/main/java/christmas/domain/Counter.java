@@ -14,11 +14,15 @@ public class Counter {
 	private static Map<Menu, Integer> orders = new HashMap<>();
 	private static Map<MenuType, Integer> ordersType = new HashMap<>();
 	
-	public void initOrdersType() {
+	private static void initOrdersType() {
 		ordersType.put(MenuType.APPETIZER, ZERO_COUNT);
 		ordersType.put(MenuType.MAIN, ZERO_COUNT);
 		ordersType.put(MenuType.DESSERT, ZERO_COUNT);
 		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
+	}
+	
+	public static void initOrders() {
+		orders.clear();
 	}
 	
 	public static int howMuchForPayment() {
@@ -41,6 +45,8 @@ public class Counter {
 	}
 	
 	public static void takeOrder(String inputMenu, int count) {
+		initOrders();
+		initOrdersType();
 		Menu orderMenu = Menu.findMenu(inputMenu);
 		MenuType orderMenuType = MenuType.findMenuType(orderMenu);
 		storeOrder(orderMenu, Integer.valueOf(count));

@@ -2,17 +2,10 @@ package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CounterTest {
-	
-	@BeforeEach
-	void setUp() {
-		Counter counter = new Counter();
-		counter.initOrdersType();
-	}
 
 	@DisplayName("주문목록의 총 합계금액을 구한다.")
     @Test
