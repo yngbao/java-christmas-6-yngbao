@@ -39,9 +39,9 @@ public class Validation {
 		}
 	}
 	
-	public static void validateOrderMenu(List<String[]> splitedInputs) {  //메뉴판에 없는 메뉴일 경우 예외처리
+	public static void validateOrderMenu(List<String[]> splitedInputs) {
         for (String[] splitedInput : splitedInputs) {
-        	if(!Arrays.stream(Menu.values()).anyMatch(menu -> menu.getViewName() == splitedInput[MENU_INDEX])) {
+        	if(!Arrays.stream(Menu.values()).anyMatch(menu -> menu.getViewName().equals(splitedInput[MENU_INDEX]))) {
         		throw new IllegalArgumentException();
         	}
         }

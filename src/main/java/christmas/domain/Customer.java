@@ -1,6 +1,8 @@
 package christmas.domain;
 
 import java.util.List;
+
+import christmas.utils.Utils;
 import christmas.validation.Validation;
 
 public class Customer {
@@ -20,9 +22,8 @@ public class Customer {
 		return date;
 	}
 	
-	public void setOrders(List<String[]> inputOrders) {
-		validateOrders(inputOrders);
-		this.orders = inputOrders;
+	public void setOrders(String[] inputs) {
+		this.orders = validateOrders(inputs);
 	}
 	
 	public List<String[]> getOrders() {
@@ -43,10 +44,13 @@ public class Customer {
 		}
 	}
 	
-	private void validateOrders(List<String[]> orders) {
+	private List<String[]> validateOrders(String[] inputs) {
+		Validation.validateMenuInputs(inputs);
+		List<String[]> orders = Utils.splitStringsToList(inputs);
 		Validation.validateOrderMenu(orders);
 		Validation.validateMoreThanOneMenu(orders);
 		Validation.validateDistinctOrder(orders);
+		return orders;
 	}
 
 }
