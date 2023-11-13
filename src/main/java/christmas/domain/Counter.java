@@ -16,12 +16,19 @@ public class Counter {
 		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
 	}
 	
-	public static void storeOrdersType(MenuType menuType) {
+	public static void takeOrder(String inputMenu, int count) {
+		Menu orderMenu = Menu.findMenu(inputMenu);
+		MenuType orderMenuType = MenuType.findMenuType(orderMenu);
+		storeOrder(orderMenu, Integer.valueOf(count));
+		storeOrdersType(orderMenuType);
+	}
+	
+	private static void storeOrdersType(MenuType menuType) {
 		int count = ordersType.get(menuType) + 1;
 		ordersType.put(menuType, count);
 	}
 	
-	public static void storeOrder(Menu menu, int count) {
+	private static void storeOrder(Menu menu, int count) {
 		orders.put(menu, count);
 	}
 	

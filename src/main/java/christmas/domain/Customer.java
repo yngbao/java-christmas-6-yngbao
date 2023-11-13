@@ -28,10 +28,7 @@ public class Customer {
 	
 	public void makeOrder() {
 		for(String[] order : orders) {
-			Menu orderMenu = Arrays.stream(Menu.values())
-					.filter(menu -> menu.getViewName() == order[MENU_INDEX])
-					.findAny().get();
-			Counter.storeOrder(orderMenu, Integer.valueOf(order[COUNT_INDEX]));
+			Counter.takeOrder(order[MENU_INDEX], Integer.valueOf(order[COUNT_INDEX]));
 		}
 	}
 	
