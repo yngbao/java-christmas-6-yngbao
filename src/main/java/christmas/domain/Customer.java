@@ -9,12 +9,21 @@ public class Customer {
 	private static final int COUNT_INDEX = 1;
 	private final int date;
 	private final List<String[]> orders;
+	private String badge;
 	
 	
 	Customer(int date, List<String[]> orders) {
 		validateOrders(orders);
 		this.date = date;
 		this.orders = orders;
+	}
+	
+	public void setBadge(String badge) {
+		this.badge = badge;
+	}
+	
+	public String getBadge() {
+		return badge;
 	}
 	
 	public int getDate() {

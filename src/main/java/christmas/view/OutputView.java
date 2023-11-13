@@ -54,5 +54,9 @@ public class OutputView {
 		System.out.println("\n<할인 후 예상 결제 금액>\n"
 				+formatter.format(Counter.howMuchForPayment()));
 	}
+	
+	public void printBadge(String badge) {
+		System.out.println("\n<"+Calendar.EVENT_MONTH+"월 이벤트 배지>\n"+badge);
+	}
 
 }

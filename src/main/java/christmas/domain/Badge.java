@@ -26,9 +26,9 @@ public enum Badge {
 		return standardAmount;
 	}
 	
-	public static String giveBadge(int amount) {
+	public static String isAnyBadge() {
 		Badge badge = Arrays.stream(Badge.values())
-				.filter(standardAmount -> (standardAmount.getStandardAmount() < amount))
+				.filter(standardAmount -> (standardAmount.getStandardAmount() < Discount.getTotalBenefitAmount()))
 				.max(Comparator.comparing(Badge::getStandardAmount))
 				.get();
 		return badge.getViewName();
