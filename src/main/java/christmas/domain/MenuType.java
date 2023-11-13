@@ -1,10 +1,6 @@
 package christmas.domain;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
-
-import org.assertj.core.util.Arrays;
 
 public enum MenuType {
 	
@@ -15,19 +11,10 @@ public enum MenuType {
 	
 	private final String viewName;
 	private final Menu[] containMenu;
-	private static final int ZERO_COUNT = 0;
-	private static Map<MenuType, Integer> ordersType = new HashMap<>();
 	
 	MenuType(String viewName, Menu[] containMenu){
 		this.viewName = viewName;
 		this.containMenu = containMenu;
-	}
-	
-	public void initOrdersType() {
-		ordersType.put(APPETIZER, ZERO_COUNT);
-		ordersType.put(MAIN, ZERO_COUNT);
-		ordersType.put(DESSERT, ZERO_COUNT);
-		ordersType.put(BEVERAGE, ZERO_COUNT);
 	}
 	
 	public String getViewName() {
@@ -38,13 +25,15 @@ public enum MenuType {
 		return containMenu;
 	}
 	
-	public void storeOrdersType(Menu ordermenu) {
-		for(MenuType menuType : MenuType.values()) {
-			if(Arrays.asList(menuType.containMenu).contains(ordermenu)) {
-				int count = ordersType.get(menuType) + 1;
-				ordersType.put(menuType, count);
-			}
-		}
+	public static MenuType findMenuType(Menu ordermenu) {
+		return Stream.of(MenuType.values())
+				.filter(type -> hasMenu(type, ordermenu))
+				.findAny().get();
+	}
+	
+	private static boolean hasMenu(MenuType from, Menu ordermenu) {
+		return Stream.of(from.containMenu)
+				.anyMatch(containMenu -> containMenu == ordermenu);
 	}
 	
 	public MenuType findDiscountMenuType(boolean isWeekday) {
