@@ -12,7 +12,7 @@ public class Calendar {
 	public static final int X_MAS = 25;
 	public static final int END_DATE = 31;
 	private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
-	public static final DayOfWeek[] weekday = 
+	public static final DayOfWeek[] WEEKDAY = 
 		{DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY}; 
 			
 	private static DayOfWeek findDayOfWeek(int month, int inputDate) {
@@ -20,9 +20,9 @@ public class Calendar {
 		return date.getDayOfWeek();
 	}
 	
-	public static boolean isWeekday(int month, int inputDate) {
-		DayOfWeek day = findDayOfWeek(month, inputDate);
-		return Arrays.stream(weekday)
+	public static boolean isWeekday(int inputDate) {
+		DayOfWeek day = findDayOfWeek(EVENT_MONTH, inputDate);
+		return Arrays.stream(WEEKDAY)
 				.anyMatch(dayOfWeek -> dayOfWeek == day);
 	}
 	

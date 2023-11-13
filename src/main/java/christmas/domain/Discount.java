@@ -44,12 +44,11 @@ public enum Discount {
 		discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
 	}
 	
-	public static void discountForWeekday(int count) {
-		discountResult.put(WEEKDAY_DISCOUNT, WEEKDAY_DISCOUNT.getAmount() * count);
-	}
-	
-	public static void discountForWeekend(int count) {
-		discountResult.put(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT.getAmount() * count);
+	public static Discount discountForDayOfWeek(boolean isWeekday) {
+		if (isWeekday) {
+			return WEEKDAY_DISCOUNT;
+		}
+		return WEEKEND_DISCOUNT;
 	}
 	
 	public static void discountSpecially(boolean isSpecial) {

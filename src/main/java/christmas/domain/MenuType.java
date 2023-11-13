@@ -36,7 +36,7 @@ public enum MenuType {
 				.anyMatch(containMenu -> containMenu == ordermenu);
 	}
 	
-	public MenuType findDiscountMenuType(boolean isWeekday) {
+	public static MenuType findDiscountMenuType(boolean isWeekday) {
 		if(isWeekday) {
 			return DESSERT;
 		}

@@ -35,8 +35,9 @@ public class Counter {
 		orders.put(menu, count);
 	}
 	
-	public static void discountOnMenu() {
-		
+	public static int howManyDiscountMenu(int date) {
+		int count = ordersType.get(MenuType.findDiscountMenuType(Calendar.isWeekday(date)));
+		return count;
 	}
 	
 	public static boolean isEnoughForEvent() {
