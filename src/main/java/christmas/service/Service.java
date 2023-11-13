@@ -75,6 +75,8 @@ public class Service {
 	private void validateInputFormat() {
 		while(true) {
 			try {
+				counter.initOrders();
+				counter.initOrdersType();
 				customer.setOrders(InputView.readOrder());
 				break;
 			} catch (IllegalArgumentException e) {

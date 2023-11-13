@@ -28,9 +28,9 @@ public enum Badge {
 	
 	public static String judgeBadge(int amount) {
 		Badge badge = Arrays.stream(Badge.values())
-				.filter(standardAmount -> (standardAmount.getStandardAmount() < amount))
+				.filter(value -> (value.getStandardAmount() < amount))
 				.max(Comparator.comparing(Badge::getStandardAmount))
-				.get();
+				.orElse(NOTHING);
 		return badge.getViewName();
 	}
 

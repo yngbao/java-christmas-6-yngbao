@@ -2,6 +2,7 @@ package christmas.view;
 
 import java.text.DecimalFormat;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import christmas.domain.Calendar;
 import christmas.domain.Counter;
@@ -40,8 +41,8 @@ public class OutputView {
 	
 	public static void printBenefitDetails() {
 		System.out.println("\n<혜택 내역>");
-		for(Benefit discount : Benefit.getDiscountResult().keySet()) {
-			System.out.println(discount.getViewName()+": -"+formatter.format(discount.getAmount()));
+		for(Entry<Benefit, Integer> discount : Benefit.getDiscountResult().entrySet()) {
+			System.out.println(discount.getKey().getViewName()+": -"+formatter.format(discount.getValue()));
 		}
 		if (Benefit.getDiscountResult().size() == 0 ) {
 			System.out.println("없음");
@@ -50,7 +51,7 @@ public class OutputView {
 	
 	public static void printTotalDiscountAmount() {
 		System.out.println("\n<총혜택 금액>\n"
-				+"-"+formatter.format(Benefit.getTotalBenefitAmount()));
+				+formatter.format(-Benefit.getTotalBenefitAmount()));
 	}
 	
 	public static void printAmountForPayment(int paymentAmount) {
