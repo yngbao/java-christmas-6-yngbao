@@ -34,7 +34,7 @@ public class Customer {
 		Customer.badge = badge;
 	}
 	
-	public static String getBadge() {
+	public String getBadge() {
 		return badge;
 	}
 	

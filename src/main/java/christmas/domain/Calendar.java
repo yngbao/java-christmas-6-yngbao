@@ -11,7 +11,7 @@ public class Calendar {
 	public static final int FIRST_DATE = 1;
 	public static final int X_MAS = 25;
 	public static final int END_DATE = 31;
-	private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
+	private static final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
 	public static final DayOfWeek[] WEEKDAY = 
 		{DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY}; 
 	
@@ -30,7 +30,7 @@ public class Calendar {
 				.anyMatch(dayOfWeek -> dayOfWeek == day);
 	}
 	
-	public boolean isSpecial(int Inputdate) {
+	public static boolean isSpecial(int Inputdate) {
 		boolean isSpecial = Arrays.stream(SPECIAL_DAY)
 				.anyMatch(day -> day == Inputdate);
 		if (isSpecial) {

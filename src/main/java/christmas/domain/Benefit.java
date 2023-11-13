@@ -34,6 +34,12 @@ public enum Benefit {
 		return discountResult;
 	}
 	
+	public static void checkBeneficial(boolean isEnough) {
+		if(!isEnough) {
+			discountResult.clear();
+		}
+	}
+	
 	public static void giveBadge() {
 		String badge = Badge.judgeBadge(getTotalBenefitAmount());
 		Customer.setBadge(badge);
@@ -63,7 +69,7 @@ public enum Benefit {
 		}
 	}
 	
-	public static void discountByDate(int date) {
+	public static void discountForChristmas(int date) {
 		if(Calendar.isBeforeChristmas(date)) {
 			discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
 		}
@@ -75,7 +81,7 @@ public enum Benefit {
 		discountResult.put(discountType, discountType.amount * count);
 	}
 	
-	public static Benefit weeklyDiscountType(boolean isWeekday) {
+	private static Benefit weeklyDiscountType(boolean isWeekday) {
 		if (isWeekday) {
 			return WEEKDAY_DISCOUNT;
 		}

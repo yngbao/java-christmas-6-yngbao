@@ -1,5 +1,7 @@
 package christmas.service;
 
+import christmas.domain.Benefit;
+import christmas.domain.Calendar;
 import christmas.domain.Counter;
 import christmas.domain.Customer;
 import christmas.validation.Validation;
@@ -35,6 +37,15 @@ public class Service {
 				System.out.println(ErrorView.TOO_MUCH.getMessage());
 			}
 		}
+	}
+	
+	public void applyBenefits() {
+		Benefit.discountForChristmas(customer.getDate());
+		Benefit.discountByDayOfWeek(customer.getDate());
+		Benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
+		Benefit.givePresent(counter.isSatisfiedForPresent());
+		Benefit.giveBadge();
+		Benefit.checkBeneficial(counter.isEnoughForEvent());
 	}
 	
 	private void validateInputMenuType() {

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Counter {
 	
 	private static final int ZERO_COUNT = 0;
-	private static final int MIN_AMOUNT_FOR_EVENT = 1_000;
+	private static final int MIN_AMOUNT_FOR_EVENT = 10_000;
 	private static final int PRESENT_CRITERIA = 120_000;
 	public static final Menu PRESENT = Menu.CHAMPAGNE;
 	private static Map<Menu, Integer> orders = new HashMap<>();
@@ -25,7 +25,7 @@ public class Counter {
 		orders.clear();
 	}
 	
-	public static int howMuchForPayment() {
+	public int howMuchForPayment() {
 		return getTotalOrderAmount() - Benefit.howMuchDiscountAount();
 	}
 	
@@ -67,15 +67,15 @@ public class Counter {
 		return count;
 	}
 	
-	public static boolean isEnoughForEvent() {
+	public boolean isEnoughForEvent() {
 		return getTotalOrderAmount() >= MIN_AMOUNT_FOR_EVENT;
 	}
 	
-	public static boolean isSatisfiedForPresent() {
+	public boolean isSatisfiedForPresent() {
 		return getTotalOrderAmount() >= PRESENT_CRITERIA;
 	}
 	
-	public static int getTotalOrderAmount() {
+	public int getTotalOrderAmount() {
 		int totalOrderAmount = 0;
 		for(Menu menu : orders.keySet()) {
 			totalOrderAmount += menu.getPrice() * orders.get(menu);
@@ -83,7 +83,7 @@ public class Counter {
 		return totalOrderAmount;
 	}
 	
-	public static Map<Menu, Integer> getOrders() {
+	public Map<Menu, Integer> getOrders() {
 		return orders;
 	}
 	
