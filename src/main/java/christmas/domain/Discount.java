@@ -11,7 +11,6 @@ public enum Discount {
 	WEEKEND_DISCOUNT("주말 할인", 2_023),
 	SPECIAL_DISCOUNT("특별 할인", 1_000),
 	PRESENT_AMOUNT("증정 이벤트", Event.PRESENT.getPrice()),
-	PRESENT_CRITERIA("증정 기준", 120_000),
 	DEFAULT("초기화", 0);
 	
 	private final String viewName;

@@ -6,6 +6,7 @@ import java.util.Map;
 public class Counter {
 	
 	private static final int ZERO_COUNT = 0;
+	private static final int PRESENT_CRITERIA = 120_000;
 	private static Map<Menu, Integer> orders = new HashMap<>();
 	private static Map<MenuType, Integer> ordersType = new HashMap<>();
 	
@@ -30,6 +31,10 @@ public class Counter {
 	
 	private static void storeOrder(Menu menu, int count) {
 		orders.put(menu, count);
+	}
+	
+	public static boolean isSatisfiedForPresent() {
+		return getTotalOrderAmount() >= PRESENT_CRITERIA;
 	}
 	
 	public static int getTotalOrderAmount() {
