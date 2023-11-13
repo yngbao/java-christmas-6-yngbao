@@ -1,7 +1,12 @@
 package christmas.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Counter {
 	
@@ -17,6 +22,13 @@ public class Counter {
 		ordersType.put(MenuType.MAIN, ZERO_COUNT);
 		ordersType.put(MenuType.DESSERT, ZERO_COUNT);
 		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
+	}
+	
+	public static List<MenuType> findOrderedMenuType(){
+		return ordersType.entrySet().stream()
+				.filter(entry -> entry.getValue() != 0)
+				.map(Map.Entry::getKey)
+				.collect(Collectors.toList());
 	}
 	
 	public static void takeOrder(String inputMenu, int count) {
