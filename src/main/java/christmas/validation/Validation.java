@@ -12,10 +12,10 @@ import christmas.domain.MenuType;
 
 public class Validation {
 	
+	public static final int MAX_ORDER_COUNT = 20;
 	private static final int MENU_INDEX = 0;
 	private static final int COUNT_INDEX = 1;
 	private static final int COUNT_ONE = 1;
-	private static final int MAX_ORDER_COUNT = 20;
 	private static final int INDEX_ZERO = 0;
 	
 	
