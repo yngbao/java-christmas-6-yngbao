@@ -6,7 +6,9 @@ import java.util.Map;
 public class Counter {
 	
 	private static final int ZERO_COUNT = 0;
+	private static final int MIN_AMOUNT_FOR_EVENT = 1_000;
 	private static final int PRESENT_CRITERIA = 120_000;
+	public static final Menu PRESENT = Menu.CHAMPAGNE;
 	private static Map<Menu, Integer> orders = new HashMap<>();
 	private static Map<MenuType, Integer> ordersType = new HashMap<>();
 	
@@ -31,6 +33,14 @@ public class Counter {
 	
 	private static void storeOrder(Menu menu, int count) {
 		orders.put(menu, count);
+	}
+	
+	public static void discountOnMenu() {
+		
+	}
+	
+	public static boolean isEnoughForEvent() {
+		return getTotalOrderAmount() >= MIN_AMOUNT_FOR_EVENT;
 	}
 	
 	public static boolean isSatisfiedForPresent() {

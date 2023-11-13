@@ -2,9 +2,9 @@ package christmas.view;
 
 import java.text.DecimalFormat;
 
+import christmas.domain.Calendar;
 import christmas.domain.Counter;
 import christmas.domain.Discount;
-import christmas.domain.Event;
 import christmas.domain.Menu;
 
 public class OutputView {
@@ -12,11 +12,11 @@ public class OutputView {
 	DecimalFormat formatter = new DecimalFormat("###,###원");
 	
 	public void printHello() {
-		System.out.printf("안녕하세요! 우테코 식당 %d월 이벤트 플래너입니다.\n", Event.EVENT_MONTH);
+		System.out.printf("안녕하세요! 우테코 식당 %d월 이벤트 플래너입니다.\n", Calendar.EVENT_MONTH);
 	}
 	
 	public void printPreviewIntro(int date) {
-		System.out.printf("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", Event.EVENT_MONTH, date);
+		System.out.printf("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n", Calendar.EVENT_MONTH, date);
 	}
 	
 	public void printOrders() {

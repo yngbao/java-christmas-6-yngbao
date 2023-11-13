@@ -1,13 +1,13 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.Event;
+import christmas.domain.Calendar;
 
 public class InputView {
 	private static final String SPLIT_CHAR = ",";
 	
 	public int readDate() {  //NumberFormatException 예외처리 필요
-		System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n", Event.EVENT_MONTH);
+		System.out.printf("%d월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n", Calendar.EVENT_MONTH);
 		String input = Console.readLine();
 		return Integer.valueOf(input);
 	}

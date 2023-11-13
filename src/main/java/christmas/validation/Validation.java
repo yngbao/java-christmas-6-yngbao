@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import christmas.domain.Event;
+import christmas.domain.Calendar;
 import christmas.domain.Menu;
 
 public class Validation {
@@ -17,7 +17,7 @@ public class Validation {
 	private static final int MAX_ORDER_COUNT = 20;
 	
 	public static void validateDateInput(int date) {
-		if (date < Event.FIRST_DATE || date > Event.END_DATE) {
+		if (date < Calendar.FIRST_DATE || date > Calendar.END_DATE) {
 			throw new IllegalArgumentException();
 		}
 	}
