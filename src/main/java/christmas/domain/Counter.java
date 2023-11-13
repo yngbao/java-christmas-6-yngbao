@@ -22,7 +22,7 @@ public class Counter {
 	}
 	
 	public static int howMuchForPayment() {
-		return getTotalOrderAmount() - Discount.howMuchDiscountAount();
+		return getTotalOrderAmount() - Benefit.howMuchDiscountAount();
 	}
 	
 	public static int howManyOrderedMenu() {

@@ -4,7 +4,8 @@ import java.text.DecimalFormat;
 
 import christmas.domain.Calendar;
 import christmas.domain.Counter;
-import christmas.domain.Discount;
+import christmas.domain.Customer;
+import christmas.domain.Benefit;
 import christmas.domain.Menu;
 
 public class OutputView {
@@ -39,17 +40,17 @@ public class OutputView {
 	
 	public void printDiscountDetails() {
 		System.out.println("\n<혜택 내역>");
-		for(Discount discount : Discount.getDiscountResult().keySet()) {
+		for(Benefit discount : Benefit.getDiscountResult().keySet()) {
 			System.out.println(discount.getViewName()+": -"+formatter.format(discount.getAmount()));
 		}
-		if (Discount.getDiscountResult().size() == 0 ) {
+		if (Benefit.getDiscountResult().size() == 0 ) {
 			System.out.println("없음");
 		}
 	}
 	
 	public void printTotalDiscountAmount() {
 		System.out.println("\n<총혜택 금액>\n"
-				+"-"+formatter.format(Discount.getTotalBenefitAmount()));
+				+"-"+formatter.format(Benefit.getTotalBenefitAmount()));
 	}
 	
 	public void printAmountForPayment() {
@@ -57,8 +58,8 @@ public class OutputView {
 				+formatter.format(Counter.howMuchForPayment()));
 	}
 	
-	public void printBadge(String badge) {
-		System.out.println("\n<"+Calendar.EVENT_MONTH+"월 이벤트 배지>\n"+badge);
+	public void printBadge() {
+		System.out.println("\n<"+Calendar.EVENT_MONTH+"월 이벤트 배지>\n"+Customer.getBadge());
 	}
 	
 	private static String presentStatus() {

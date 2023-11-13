@@ -11,7 +11,7 @@ class BadgeTest {
 	@CsvSource(value = {"4000:없음", "8000:별", "17000:트리", "25000:산타"}, delimiter = ':')
     @ParameterizedTest
     void giveBadgeTest(Integer amount, String expected) {
-		String badge = Badge.giveBadge(amount);
+		String badge = Badge.judgeBadge(amount);
         assertThat(badge).isEqualTo(expected);
     }
 

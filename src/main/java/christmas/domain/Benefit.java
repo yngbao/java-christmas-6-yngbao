@@ -3,7 +3,7 @@ package christmas.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Discount {
+public enum Benefit {
 	
 	X_MAS_DISCOUNT("크리스마스 디데이 할인", 1_000),
 	INCREASING("일일 할인증가액", 100),
@@ -15,9 +15,9 @@ public enum Discount {
 	
 	private final String viewName;
 	private final int amount;
-	private static Map<Discount, Integer> discountResult = new HashMap<>();
+	private static Map<Benefit, Integer> discountResult = new HashMap<>();
 
-	Discount(String viewName, int amount) {
+	Benefit(String viewName, int amount) {
 		this.viewName = viewName;
 		this.amount = amount;
 	}
@@ -30,13 +30,18 @@ public enum Discount {
 		return amount;
 	}
 	
-	public static Map<Discount, Integer> getDiscountResult(){
+	public static Map<Benefit, Integer> getDiscountResult(){
 		return discountResult;
+	}
+	
+	public static void giveBadge() {
+		String badge = Badge.judgeBadge(getTotalBenefitAmount());
+		Customer.setBadge(badge);
 	}
 	
 	public static int getTotalBenefitAmount() {
 		int amount = 0;
-		for(Discount discount : discountResult.keySet()) {
+		for(Benefit discount : discountResult.keySet()) {
 			amount += discountResult.get(discount);
 		}
 		return amount;
@@ -44,7 +49,7 @@ public enum Discount {
 	
 	public static int howMuchDiscountAount() {
 		int amount = 0;
-		for(Discount discount : discountResult.keySet()) {
+		for(Benefit discount : discountResult.keySet()) {
 			if (discount != PRESENT) {
 				amount += discountResult.get(discount);
 			}
@@ -65,12 +70,12 @@ public enum Discount {
 	}
 	
 	public static void discountByDayOfWeek(int date) {
-		Discount discountType = weeklyDiscountType(Calendar.isWeekday(date));
+		Benefit discountType = weeklyDiscountType(Calendar.isWeekday(date));
 		int count = Counter.howManyDiscountMenu(date);
 		discountResult.put(discountType, discountType.amount * count);
 	}
 	
-	public static Discount weeklyDiscountType(boolean isWeekday) {
+	public static Benefit weeklyDiscountType(boolean isWeekday) {
 		if (isWeekday) {
 			return WEEKDAY_DISCOUNT;
 		}
