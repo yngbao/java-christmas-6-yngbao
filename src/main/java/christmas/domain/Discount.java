@@ -34,6 +34,14 @@ public enum Discount {
 		return discountResult;
 	}
 	
+	public static int getTotalDiscountAmount() {
+		int amount = 0;
+		for(Discount discount : discountResult.keySet()) {
+			amount += discountResult.get(discount);
+		}
+		return amount;
+	}
+	
 	public static void givePresent(boolean isSatisfied) {
 		if (isSatisfied) {
 			discountResult.put(PRESENT_AMOUNT, PRESENT_AMOUNT.getAmount());
