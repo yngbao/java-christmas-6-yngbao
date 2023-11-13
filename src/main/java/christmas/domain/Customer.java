@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import christmas.validation.Validation;
 

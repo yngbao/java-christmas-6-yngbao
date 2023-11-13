@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import christmas.domain.Event;
 import christmas.domain.Menu;
 
 public class Validation {
@@ -15,7 +16,13 @@ public class Validation {
 	private static final int MIN_ORDER_COUNT = 1;
 	private static final int MAX_ORDER_COUNT = 20;
 	
-	public static void validateInputs(String[] inputs) {
+	public static void validateDateInput(int date) {
+		if (date < Event.FIRST_DATE || date > Event.END_DATE) {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	public static void validateMenuInputs(String[] inputs) {
 		for(String input : inputs)
 		if (!input.matches("\\S+-\\d+")) {
 			throw new IllegalArgumentException();
