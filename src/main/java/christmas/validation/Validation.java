@@ -7,14 +7,24 @@ import java.util.Map;
 import java.util.Set;
 
 import christmas.domain.Calendar;
+import christmas.domain.Counter;
 import christmas.domain.Menu;
+import christmas.domain.MenuType;
 
 public class Validation {
 	
 	private static final int MENU_INDEX = 0;
 	private static final int COUNT_INDEX = 1;
-	private static final int MIN_ORDER_COUNT = 1;
+	private static final int COUNT_ONE = 1;
 	private static final int MAX_ORDER_COUNT = 20;
+	private static final int INDEX_ZERO = 0;
+	
+	public static void validateNotOnlyBeverage() {
+		List<MenuType> orderedMenuType = Counter.findOrderedMenuType();
+		if (orderedMenuType.size() == COUNT_ONE && orderedMenuType.get(INDEX_ZERO) == MenuType.BEVERAGE) {
+			throw new IllegalArgumentException();
+		}
+	}
 	
 	public static void validateDateInput(int date) {
 		if (date < Calendar.FIRST_DATE || date > Calendar.END_DATE) {
@@ -39,7 +49,7 @@ public class Validation {
 	
 	public static void validateMoreThanOneMenu(List<String[]> splitedInputs) {
         for (String[] splitedInput : splitedInputs) {
-        	if(Integer.valueOf(splitedInput[COUNT_INDEX]) < MIN_ORDER_COUNT) {
+        	if(Integer.valueOf(splitedInput[COUNT_INDEX]) < COUNT_ONE) {
         		throw new IllegalArgumentException();
         	}
         }
