@@ -26,7 +26,7 @@ public enum Badge {
 		return standardAmount;
 	}
 	
-	public static String isAnyBadge() {
+	public static String isThereAnyBadge() {
 		Badge badge = Arrays.stream(Badge.values())
 				.filter(standardAmount -> (standardAmount.getStandardAmount() < Discount.getTotalBenefitAmount()))
 				.max(Comparator.comparing(Badge::getStandardAmount))

@@ -10,7 +10,7 @@ public enum Discount {
 	WEEKDAY_DISCOUNT("평일 할인", 2_023),
 	WEEKEND_DISCOUNT("주말 할인", 2_023),
 	SPECIAL_DISCOUNT("특별 할인", 1_000),
-	PRESENT_AMOUNT("증정 이벤트", Counter.PRESENT.getPrice()),
+	PRESENT("증정 이벤트", Counter.PRESENT.getPrice()),
 	DEFAULT("초기화", 0);
 	
 	private final String viewName;
@@ -45,7 +45,7 @@ public enum Discount {
 	public static int howMuchDiscountAount() {
 		int amount = 0;
 		for(Discount discount : discountResult.keySet()) {
-			if (discount != PRESENT_AMOUNT) {
+			if (discount != PRESENT) {
 				amount += discountResult.get(discount);
 			}
 		}
@@ -54,7 +54,7 @@ public enum Discount {
 	
 	public static void givePresent(boolean isSatisfied) {
 		if (isSatisfied) {
-			discountResult.put(PRESENT_AMOUNT, PRESENT_AMOUNT.getAmount());
+			discountResult.put(PRESENT, PRESENT.getAmount());
 		}
 	}
 	

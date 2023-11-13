@@ -10,6 +10,8 @@ import christmas.domain.Menu;
 public class OutputView {
 	
 	DecimalFormat formatter = new DecimalFormat("###,###원");
+	private static final int PRESENT_COUNT = 1;
+	private static final String NOTHING = "없음";
 	
 	public void printHello() {
 		System.out.printf("안녕하세요! 우테코 식당 %d월 이벤트 플래너입니다.\n", Calendar.EVENT_MONTH);
@@ -31,8 +33,8 @@ public class OutputView {
 				+formatter.format(Counter.getTotalOrderAmount()));
 	}
 	
-	public void printPresentMenu(String presentStatus) {
-		System.out.println("\n<증정 메뉴>\n" + presentStatus);
+	public void printPresentMenu() {
+		System.out.println("\n<증정 메뉴>\n" + presentStatus());
 	}
 	
 	public void printDiscountDetails() {
@@ -57,6 +59,13 @@ public class OutputView {
 	
 	public void printBadge(String badge) {
 		System.out.println("\n<"+Calendar.EVENT_MONTH+"월 이벤트 배지>\n"+badge);
+	}
+	
+	private static String presentStatus() {
+		if (Counter.isSatisfiedForPresent()) {
+			return Counter.PRESENT.getViewName()+" "+PRESENT_COUNT+"개";
+		}
+		return NOTHING;
 	}
 
 }
