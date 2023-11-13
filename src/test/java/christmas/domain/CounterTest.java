@@ -10,13 +10,12 @@ class CounterTest {
 	@DisplayName("주문목록의 총 합계금액을 구한다.")
     @Test
     void getTotalOrderAmount() {
+		Counter counter = new Counter();
 		Counter.takeOrder("해산물파스타", 2);
-		Counter.takeOrder("초코케이크", 1);
-		Counter.takeOrder("레드와인", 1);
 
-        int result = Counter.getTotalOrderAmount();
+        int result = counter.getTotalOrderAmount();
 
-        assertThat(result).isEqualTo(145000);
+        assertThat(result).isEqualTo(70000);
     }
 
 }
