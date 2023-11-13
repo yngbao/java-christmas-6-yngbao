@@ -59,7 +59,9 @@ public enum Discount {
 	}
 	
 	public static void discountByDate(int date) {
-		discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
+		if(Calendar.isBeforeChristmas(date)) {
+			discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
+		}
 	}
 	
 	public static void discountByDayOfWeek(int date) {

@@ -14,6 +14,10 @@ public class Calendar {
 	private final int[] SPECIAL_DAY = {3, 10, 17, 24, 25, 31};
 	public static final DayOfWeek[] WEEKDAY = 
 		{DayOfWeek.SUNDAY, DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY}; 
+	
+	public static boolean isBeforeChristmas(int inputDate) {
+		return (inputDate >= FIRST_DATE && inputDate <= X_MAS);
+	}
 			
 	private static DayOfWeek findDayOfWeek(int month, int inputDate) {
 		LocalDate date = LocalDate.of(EVENT_YEAR, month, inputDate);
