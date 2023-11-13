@@ -44,7 +44,13 @@ public enum Discount {
 		discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
 	}
 	
-	public static Discount discountForDayOfWeek(boolean isWeekday) {
+	public static void discountByDayOfWeek(int date) {
+		Discount discountType = weeklyDiscountType(Calendar.isWeekday(date));
+		int count = Counter.howManyDiscountMenu(date);
+		discountResult.put(discountType, discountType.amount * count);
+	}
+	
+	public static Discount weeklyDiscountType(boolean isWeekday) {
 		if (isWeekday) {
 			return WEEKDAY_DISCOUNT;
 		}
