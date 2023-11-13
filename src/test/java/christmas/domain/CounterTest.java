@@ -2,17 +2,24 @@ package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CounterTest {
+	
+	@BeforeEach
+	void setUp() {
+		Counter counter = new Counter();
+		counter.initOrdersType();
+	}
 
 	@DisplayName("주문목록의 총 합계금액을 구한다.")
     @Test
     void getTotalOrderAmount() {
-		Counter.storeOrder(Menu.SEAFOOD_PASTA, 2);
-		Counter.storeOrder(Menu.CHOCO_CAKE, 1);
-		Counter.storeOrder(Menu.RED_WINE, 1);
+		Counter.takeOrder("해산물파스타", 2);
+		Counter.takeOrder("초코케이크", 1);
+		Counter.takeOrder("레드와인", 1);
 
         int result = Counter.getTotalOrderAmount();
 

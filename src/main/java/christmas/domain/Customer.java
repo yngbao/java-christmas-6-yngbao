@@ -7,15 +7,26 @@ public class Customer {
 	
 	private static final int MENU_INDEX = 0;
 	private static final int COUNT_INDEX = 1;
-	private final int date;
-	private final List<String[]> orders;
+	private int date;
+	private List<String[]> orders;
 	private static String badge;
 	
-	
-	Customer(int date, List<String[]> orders) {
-		validateOrders(orders);
+	public void setDate(int date) {
+		Validation.validateDateInput(date);
 		this.date = date;
-		this.orders = orders;
+	}
+	
+	public int getDate() {
+		return date;
+	}
+	
+	public void setOrders(List<String[]> inputOrders) {
+		validateOrders(inputOrders);
+		this.orders = inputOrders;
+	}
+	
+	public List<String[]> getOrders() {
+		return orders;
 	}
 	
 	public static void setBadge(String badge) {
@@ -24,14 +35,6 @@ public class Customer {
 	
 	public static String getBadge() {
 		return badge;
-	}
-	
-	public int getDate() {
-		return date;
-	}
-	
-	public List<String[]> getOrders() {
-		return orders;
 	}
 	
 	public void makeOrder() {
