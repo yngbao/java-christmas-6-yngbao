@@ -34,10 +34,20 @@ public enum Discount {
 		return discountResult;
 	}
 	
-	public static int getTotalDiscountAmount() {
+	public static int getTotalBenefitAmount() {
 		int amount = 0;
 		for(Discount discount : discountResult.keySet()) {
 			amount += discountResult.get(discount);
+		}
+		return amount;
+	}
+	
+	public static int howMuchDiscountAount() {
+		int amount = 0;
+		for(Discount discount : discountResult.keySet()) {
+			if (discount != PRESENT_AMOUNT) {
+				amount += discountResult.get(discount);
+			}
 		}
 		return amount;
 	}

@@ -35,7 +35,7 @@ public class OutputView {
 		System.out.println("\n<증정 메뉴>\n" + presentStatus);
 	}
 	
-	public void printBenefitDetails() {
+	public void printDiscountDetails() {
 		System.out.println("\n<혜택 내역>");
 		for(Discount discount : Discount.getDiscountResult().keySet()) {
 			System.out.println(discount.getViewName()+": -"+formatter.format(discount.getAmount()));
@@ -43,6 +43,16 @@ public class OutputView {
 		if (Discount.getDiscountResult().size() == 0 ) {
 			System.out.println("없음");
 		}
+	}
+	
+	public void printTotalDiscountAmount() {
+		System.out.println("\n<총혜택 금액>\n"
+				+"-"+formatter.format(Discount.getTotalBenefitAmount()));
+	}
+	
+	public void printAmountForPayment() {
+		System.out.println("\n<할인 후 예상 결제 금액>\n"
+				+formatter.format(Counter.howMuchForPayment()));
 	}
 
 }

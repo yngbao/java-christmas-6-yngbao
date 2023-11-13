@@ -21,6 +21,10 @@ public class Counter {
 		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
 	}
 	
+	public static int howMuchForPayment() {
+		return getTotalOrderAmount() - Discount.howMuchDiscountAount();
+	}
+	
 	public static int howManyOrderedMenu() {
 		int count = 0;
 		for(Menu menu : orders.keySet()) {
