@@ -56,5 +56,17 @@ class CustomerTest {
         assertThatThrownBy(() -> customer.setOrders(case2))
         		.isInstanceOf(IllegalArgumentException.class);
     }
+	
+	@DisplayName("문자열 배열로 이루어진 주문을 올바른 주문 형식으로 변환한다.")
+    @Test
+    void getOrdersTest() {
+		String[] case1 = {"양송이수프-1", "바비큐립-1"};
+		customer.setOrders(case1);
+		Map<Menu, Integer> result = customer.getOrders();
+		
+		assertThat(result)
+				.containsOnly(Map.entry(Menu.MUSHROOM_SOUP, 1),Map.entry(Menu.BBQ_RIBS, 1));
+                
+    }
 
 }
