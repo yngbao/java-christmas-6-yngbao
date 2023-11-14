@@ -14,5 +14,13 @@ class MenuTypeTest {
 		MenuType actual = MenuType.findMenuType(menu);
         assertThat(actual).isEqualTo(expected);
     }
+	
+	@DisplayName("평일 여부에 따라 할인되는 메뉴타입을 확인한다.")
+	@CsvSource(value = {"true:DESSERT", "false:MAIN"}, delimiter = ':')
+    @ParameterizedTest
+    void findDiscountMenuTypeTest(boolean isWeekday, MenuType expected) {
+		MenuType actual = MenuType.findDiscountMenuType(isWeekday);
+        assertThat(actual).isEqualTo(expected);
+    }
 
 }
