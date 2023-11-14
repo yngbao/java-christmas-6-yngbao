@@ -44,13 +44,20 @@ public class Counter {
 				.collect(Collectors.toList());
 	}
 	
+	public void takeOrders(Map<Menu, Integer> orders) {
+		storeOrder(orders);
+		for(Menu menu : orders.keySet()) {
+			storeOrderType(MenuType.findMenuType(menu), orders.get(menu));
+		}
+	}
+	
 	public void storeOrderType(MenuType menuType, int count) {
 		int totalCount = ordersType.get(menuType) + count;
 		ordersType.put(menuType, totalCount);
 	}
 	
-	public void storeOrder(Menu menu, int count) {
-		orders.put(menu, count);
+	public void storeOrder(Map<Menu, Integer> order) {
+		orders.putAll(order);
 	}
 	
 	public int howManyDiscountMenu(int date) {

@@ -1,12 +1,16 @@
 package christmas.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import christmas.utils.Utils;
 import christmas.validation.Validation;
 
 public class Customer {
 	
+	private static final int MENU_INDEX = 0;
+	private static final int COUNT_INDEX = 1;
 	private int date;
 	private List<String[]> orders;
 	private static String badge;
@@ -24,8 +28,13 @@ public class Customer {
 		this.orders = validateOrders(inputs);
 	}
 	
-	public List<String[]> getOrders() {
-		return orders;
+	public Map<Menu, Integer> getOrders() {
+		Map<Menu, Integer> formattedOrder = new HashMap<>();
+		for(String[] inputOrder : orders) {
+			Menu orderMenu = Menu.findMenu(inputOrder[MENU_INDEX]);
+			formattedOrder.put(orderMenu, Integer.valueOf(inputOrder[COUNT_INDEX]));
+		}
+		return formattedOrder;
 	}
 	
 	public static void setBadge(String badge) {
