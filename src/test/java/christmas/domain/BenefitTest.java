@@ -55,6 +55,7 @@ class BenefitTest {
     @Test
     void totalBenefitAmountTest() {
 		int date = 4;
+		
 		benefit.checkBeneficial(false);
 		benefit.givePresent(true);
 		benefit.discountForChristmas(date);
@@ -68,6 +69,7 @@ class BenefitTest {
     @Test
     void totalDiscountAmountTest() {
 		int date = 4;
+		
 		benefit.checkBeneficial(false);
 		benefit.givePresent(true);
 		benefit.discountForChristmas(date);

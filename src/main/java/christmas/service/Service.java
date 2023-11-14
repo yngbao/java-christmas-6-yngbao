@@ -32,11 +32,13 @@ public class Service {
 	public void getInputOrder() {
 		while(true) {
 			try {
-				validateInputMenuType();
+				customer.setOrders(InputView.readOrder());
+				counter.takeOrders(customer.getOrders());
+				Validation.validateNotOnlyBeverage(counter.findOrderedMenuType());
 				Validation.validateTotalMenuCount(counter.howManyOrderedMenu());
 				break;
 			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorView.TOO_MUCH.getMessage());
+				System.out.println(ErrorView.ORDER_ERROR.getMessage());
 			}
 		}
 	}
@@ -60,30 +62,6 @@ public class Service {
 		OutputView.printTotalDiscountAmount(benefit.getTotalBenefitAmount());
 		OutputView.printAmountForPayment(counter.howMuchForPayment(benefit.howMuchDiscountAmount()));
 		OutputView.printBadge(customer.getBadge());
-	}
-	
-	private void validateInputMenuType() {
-		while(true) {
-			try {
-				validateInputFormat();
-				counter.takeOrders(customer.getOrders());
-				Validation.validateNotOnlyBeverage(counter.findOrderedMenuType());
-				break;
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorView.ONLY_BEVERAGE.getMessage());
-			}
-		}
-	}
-	
-	private void validateInputFormat() {
-		while(true) {
-			try {
-				customer.setOrders(InputView.readOrder());
-				break;
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorView.ORDER_ERROR.getMessage());
-			}
-		}
 	}
 	
 }

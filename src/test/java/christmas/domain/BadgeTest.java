@@ -12,6 +12,7 @@ class BadgeTest {
     @ParameterizedTest
     void giveBadgeTest(Integer amount, String expected) {
 		String badge = Badge.judgeBadge(amount);
+		
         assertThat(badge).isEqualTo(expected);
     }
 
