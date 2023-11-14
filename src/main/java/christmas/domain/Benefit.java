@@ -75,9 +75,9 @@ public enum Benefit {
 		}
 	}
 	
-	public static void discountByDayOfWeek(int date) {
+	public static void discountByDayOfWeek(int date, int menuCount) {
 		Benefit discountType = weeklyDiscountType(Calendar.isWeekday(date));
-		int count = Counter.howManyDiscountMenu(date);
+		int count = menuCount;
 		discountResult.put(discountType, discountType.amount * count);
 	}
 	

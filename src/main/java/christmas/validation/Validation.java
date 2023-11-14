@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import christmas.domain.Calendar;
-import christmas.domain.Counter;
 import christmas.domain.Menu;
 import christmas.domain.MenuType;
 
@@ -19,8 +18,8 @@ public class Validation {
 	private static final int INDEX_ZERO = 0;
 	
 	
-	public static void validateNotOnlyBeverage() {
-		List<MenuType> orderedMenuType = Counter.findOrderedMenuType();
+	public static void validateNotOnlyBeverage(List<MenuType> orderedMenu) {
+		List<MenuType> orderedMenuType = orderedMenu;
 		if (orderedMenuType.size() == COUNT_ONE && orderedMenuType.get(INDEX_ZERO) == MenuType.BEVERAGE) {
 			throw new IllegalArgumentException();
 		}
@@ -65,8 +64,8 @@ public class Validation {
 		}
 	}
 	
-	public static void validateTotalMenuCount() {
-		int count = Counter.howManyOrderedMenu();
+	public static void validateTotalMenuCount(int orderedCount) {
+		int count = orderedCount;
 		if(count > MAX_ORDER_COUNT) {
 			throw new IllegalArgumentException();
 		}

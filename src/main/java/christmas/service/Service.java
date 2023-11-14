@@ -4,12 +4,17 @@ import christmas.domain.Benefit;
 import christmas.domain.Calendar;
 import christmas.domain.Counter;
 import christmas.domain.Customer;
+import christmas.domain.Menu;
+import christmas.domain.MenuType;
 import christmas.validation.Validation;
 import christmas.view.ErrorView;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class Service {
+	private static final int MENU_INDEX = 0;
+	private static final int COUNT_INDEX = 1;
+	
 	Customer customer = new Customer();
 	Counter counter = new Counter();
 	
@@ -31,7 +36,7 @@ public class Service {
 		while(true) {
 			try {
 				validateInputMenuType();
-				Validation.validateTotalMenuCount();
+				Validation.validateTotalMenuCount(counter.howManyOrderedMenu());
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println(ErrorView.TOO_MUCH.getMessage());
@@ -41,7 +46,8 @@ public class Service {
 	
 	public void applyBenefits() {
 		Benefit.discountForChristmas(customer.getDate());
-		Benefit.discountByDayOfWeek(customer.getDate());
+		int count = counter.howManyDiscountMenu(COUNT_INDEX);
+		Benefit.discountByDayOfWeek(customer.getDate(), count);
 		Benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
 		Benefit.givePresent(counter.isSatisfiedForPresent());
 		Benefit.giveBadge();
@@ -63,8 +69,8 @@ public class Service {
 		while(true) {
 			try {
 				validateInputFormat();
-				customer.makeOrder();
-				Validation.validateNotOnlyBeverage();
+				makeOrder();
+				Validation.validateNotOnlyBeverage(counter.findOrderedMenuType());
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println(ErrorView.ONLY_BEVERAGE.getMessage());
@@ -83,6 +89,19 @@ public class Service {
 				System.out.println(ErrorView.ORDER_ERROR.getMessage());
 			}
 		}
+	}
+	
+	public void makeOrder() {
+		for(String[] order : customer.getOrders()) {
+			takeOrder(order[MENU_INDEX], Integer.valueOf(order[COUNT_INDEX]));
+		}
+	}
+	
+	public void takeOrder(String inputMenu, int count) {
+		Menu orderMenu = Menu.findMenu(inputMenu);
+		MenuType orderMenuType = MenuType.findMenuType(orderMenu);
+		counter.storeOrder(orderMenu, Integer.valueOf(count));
+		counter.storeOrderType(orderMenuType, Integer.valueOf(count));
 	}
 	
 }

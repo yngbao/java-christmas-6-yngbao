@@ -12,6 +12,7 @@ class MenuTypeTest {
     @ParameterizedTest
     void findMenuTypeTest(Menu menu, MenuType expected) {
 		MenuType actual = MenuType.findMenuType(menu);
+		
         assertThat(actual).isEqualTo(expected);
     }
 	
@@ -20,6 +21,7 @@ class MenuTypeTest {
     @ParameterizedTest
     void findDiscountMenuTypeTest(boolean isWeekday, MenuType expected) {
 		MenuType actual = MenuType.findDiscountMenuType(isWeekday);
+		
         assertThat(actual).isEqualTo(expected);
     }
 

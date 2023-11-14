@@ -13,6 +13,7 @@ class CalendarTest {
     @ParameterizedTest
     void isWeekdayTest(Integer date, boolean isWeekday) {
 		boolean actual = Calendar.isWeekday(date);
+		
         assertThat(actual).isEqualTo(isWeekday);
     }
 	
@@ -21,6 +22,7 @@ class CalendarTest {
     @ParameterizedTest
     void isBeforeChristmasTest(Integer date, boolean isWeekday) {
 		boolean actual = Calendar.isBeforeChristmas(date);
+		
         assertThat(actual).isEqualTo(isWeekday);
     }
 	
@@ -29,6 +31,7 @@ class CalendarTest {
     @ParameterizedTest
     void isSpecialTest(Integer date, boolean isWeekday) {
 		boolean actual = Calendar.isSpecial(date);
+		
         assertThat(actual).isEqualTo(isWeekday);
     }
 

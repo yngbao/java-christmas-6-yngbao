@@ -12,6 +12,7 @@ class MenuTest {
     @ParameterizedTest
     void findMenuTest(String input, Menu expected) {
 		Menu actual = Menu.findMenu(input);
+		
         assertThat(actual).isEqualTo(expected);
     }
 

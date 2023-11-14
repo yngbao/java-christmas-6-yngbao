@@ -7,8 +7,6 @@ import christmas.validation.Validation;
 
 public class Customer {
 	
-	private static final int MENU_INDEX = 0;
-	private static final int COUNT_INDEX = 1;
 	private int date;
 	private List<String[]> orders;
 	private static String badge;
@@ -36,12 +34,6 @@ public class Customer {
 	
 	public String getBadge() {
 		return badge;
-	}
-	
-	public void makeOrder() {
-		for(String[] order : orders) {
-			Counter.takeOrder(order[MENU_INDEX], Integer.valueOf(order[COUNT_INDEX]));
-		}
 	}
 	
 	private List<String[]> validateOrders(String[] inputs) {

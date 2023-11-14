@@ -11,8 +11,8 @@ public class Counter {
 	private static final int MIN_AMOUNT_FOR_EVENT = 10_000;
 	private static final int PRESENT_CRITERIA = 120_000;
 	public static final Menu PRESENT = Menu.CHAMPAGNE;
-	private static Map<Menu, Integer> orders = new HashMap<>();
-	private static Map<MenuType, Integer> ordersType = new HashMap<>();
+	private Map<Menu, Integer> orders = new HashMap<>();
+	private Map<MenuType, Integer> ordersType = new HashMap<>();
 	
 	public void initOrdersType() {
 		ordersType.put(MenuType.APPETIZER, ZERO_COUNT);
@@ -29,7 +29,7 @@ public class Counter {
 		return getTotalOrderAmount() - Benefit.howMuchDiscountAount();
 	}
 	
-	public static int howManyOrderedMenu() {
+	public int howManyOrderedMenu() {
 		int count = 0;
 		for(Menu menu : orders.keySet()) {
 			count += orders.get(menu);
@@ -37,30 +37,23 @@ public class Counter {
 		return count;
 	}
 	
-	public static List<MenuType> findOrderedMenuType(){
+	public List<MenuType> findOrderedMenuType(){
 		return ordersType.entrySet().stream()
 				.filter(entry -> entry.getValue() != 0)
 				.map(Map.Entry::getKey)
 				.collect(Collectors.toList());
 	}
 	
-	public static void takeOrder(String inputMenu, int count) {
-		Menu orderMenu = Menu.findMenu(inputMenu);
-		MenuType orderMenuType = MenuType.findMenuType(orderMenu);
-		storeOrder(orderMenu, Integer.valueOf(count));
-		storeOrdersType(orderMenuType, Integer.valueOf(count));
-	}
-	
-	private static void storeOrdersType(MenuType menuType, int count) {
+	public void storeOrderType(MenuType menuType, int count) {
 		int totalCount = ordersType.get(menuType) + count;
 		ordersType.put(menuType, totalCount);
 	}
 	
-	private static void storeOrder(Menu menu, int count) {
+	public void storeOrder(Menu menu, int count) {
 		orders.put(menu, count);
 	}
 	
-	public static int howManyDiscountMenu(int date) {
+	public int howManyDiscountMenu(int date) {
 		int count = ordersType.get(MenuType.findDiscountMenuType(Calendar.isWeekday(date)));
 		return count;
 	}
