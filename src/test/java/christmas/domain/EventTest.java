@@ -1,5 +1,5 @@
 package christmas.domain;
 
-class DiscountTest {
+class EventTest {
 
 }

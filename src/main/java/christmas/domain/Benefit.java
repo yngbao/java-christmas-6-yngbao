@@ -3,100 +3,76 @@ package christmas.domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum Benefit {
+public class Benefit {
 	
-	X_MAS_DISCOUNT("크리스마스 디데이 할인", 1_000),
-	INCREASING("일일 할인증가액", 100),
-	WEEKDAY_DISCOUNT("평일 할인", 2_023),
-	WEEKEND_DISCOUNT("주말 할인", 2_023),
-	SPECIAL_DISCOUNT("특별 할인", 1_000),
-	PRESENT("증정 이벤트", Counter.PRESENT.getPrice()),
-	DEFAULT("초기화", 0);
+	private Map<Event, Integer> discountResult = new HashMap<>();
 	
-	private final String viewName;
-	private final int amount;
-	private static Map<Benefit, Integer> discountResult = new HashMap<>();
-
-	Benefit(String viewName, int amount) {
-		this.viewName = viewName;
-		this.amount = amount;
-	}
-	
-	public String getViewName() {
-		return viewName;
-	}
-	
-	public int getAmount() {
-		return amount;
-	}
-	
-	public static Map<Benefit, Integer> getDiscountResult(){
+	public Map<Event, Integer> getDiscountResult(){
 		return discountResult;
 	}
 	
-	public static void checkBeneficial(boolean isEnough) {
+	public void checkBeneficial(boolean isEnough) {
 		if(!isEnough) {
 			discountResult.clear();
 		}
 	}
-	
-	public static void giveBadge() {
+
+	public void giveBadge() {
 		String badge = Badge.judgeBadge(getTotalBenefitAmount());
 		Customer.setBadge(badge);
 	}
 	
-	public static int getTotalBenefitAmount() {
+	public int getTotalBenefitAmount() {
 		int amount = 0;
-		for(Benefit discount : discountResult.keySet()) {
+		for(Event discount : discountResult.keySet()) {
 			amount += discountResult.get(discount);
 		}
 		return amount;
 	}
 	
-	public static int howMuchDiscountAount() {
+	public int howMuchDiscountAount() {
 		int amount = 0;
-		for(Benefit discount : discountResult.keySet()) {
-			if (discount != PRESENT) {
+		for(Event discount : discountResult.keySet()) {
+			if (discount != Event.PRESENT) {
 				amount += discountResult.get(discount);
 			}
 		}
 		return amount;
 	}
 	
-	public static void givePresent(boolean isSatisfied) {
+	public void givePresent(boolean isSatisfied) {
 		if (isSatisfied) {
-			discountResult.put(PRESENT, PRESENT.getAmount());
+			discountResult.put(Event.PRESENT, Event.PRESENT.getAmount());
 		}
 	}
 	
-	public static void discountForChristmas(int date) {
+	public void discountForChristmas(int date) {
 		if(Calendar.isBeforeChristmas(date)) {
-			discountResult.put(X_MAS_DISCOUNT, getDateDiscount(date));
+			discountResult.put(Event.X_MAS_DISCOUNT, getDateDiscount(date));
 		}
 	}
 	
-	public static void discountByDayOfWeek(int date, int menuCount) {
-		Benefit discountType = weeklyDiscountType(Calendar.isWeekday(date));
+	public void discountByDayOfWeek(int date, int menuCount) {
+		Event discountType = weeklyDiscountType(Calendar.isWeekday(date));
 		int count = menuCount;
-		discountResult.put(discountType, discountType.amount * count);
+		discountResult.put(discountType, discountType.getAmount() * count);
 	}
 	
-	private static Benefit weeklyDiscountType(boolean isWeekday) {
+	private Event weeklyDiscountType(boolean isWeekday) {
 		if (isWeekday) {
-			return WEEKDAY_DISCOUNT;
+			return Event.WEEKDAY_DISCOUNT;
 		}
-		return WEEKEND_DISCOUNT;
+		return Event.WEEKEND_DISCOUNT;
 	}
 	
-	public static void discountSpecially(boolean isSpecial) {
+	public void discountSpecially(boolean isSpecial) {
 		if (isSpecial) {
-			discountResult.put(SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getAmount());
+			discountResult.put(Event.SPECIAL_DISCOUNT, Event.SPECIAL_DISCOUNT.getAmount());
 		}
 	}
 
-	private static int getDateDiscount(int date) {
-		int more = INCREASING.getAmount() * (date - Calendar.FIRST_DATE);
-		return X_MAS_DISCOUNT.getAmount() + more;
+	private int getDateDiscount(int date) {
+		int more = Event.INCREASING.getAmount() * (date - Calendar.FIRST_DATE);
+		return Event.X_MAS_DISCOUNT.getAmount() + more;
 	}
-
 }

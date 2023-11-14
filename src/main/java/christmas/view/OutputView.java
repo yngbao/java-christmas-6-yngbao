@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import christmas.domain.Calendar;
 import christmas.domain.Counter;
-import christmas.domain.Benefit;
+import christmas.domain.Event;
 import christmas.domain.Menu;
 
 public class OutputView {
@@ -41,17 +41,17 @@ public class OutputView {
 	
 	public static void printBenefitDetails() {
 		System.out.println("\n<혜택 내역>");
-		for(Entry<Benefit, Integer> discount : Benefit.getDiscountResult().entrySet()) {
+		for(Entry<Event, Integer> discount : Event.getDiscountResult().entrySet()) {
 			System.out.println(discount.getKey().getViewName()+": -"+formatter.format(discount.getValue()));
 		}
-		if (Benefit.getDiscountResult().size() == 0 ) {
+		if (Event.getDiscountResult().size() == 0 ) {
 			System.out.println("없음");
 		}
 	}
 	
 	public static void printTotalDiscountAmount() {
 		System.out.println("\n<총혜택 금액>\n"
-				+formatter.format(-Benefit.getTotalBenefitAmount()));
+				+formatter.format(-Event.getTotalBenefitAmount()));
 	}
 	
 	public static void printAmountForPayment(int paymentAmount) {

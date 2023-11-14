@@ -13,6 +13,7 @@ public class Service {
 
 	Customer customer = new Customer();
 	Counter counter = new Counter();
+	Benefit benefit = new Benefit();
 	
 	public void getInputDate() {
 		OutputView.printHello();
@@ -41,13 +42,13 @@ public class Service {
 	}
 	
 	public void applyBenefits() {
-		Benefit.discountForChristmas(customer.getDate());
+		benefit.discountForChristmas(customer.getDate());
 		int count = counter.howManyDiscountMenu(customer.getDate());
-		Benefit.discountByDayOfWeek(customer.getDate(), count);
-		Benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
-		Benefit.givePresent(counter.isSatisfiedForPresent());
-		Benefit.giveBadge();
-		Benefit.checkBeneficial(counter.isEnoughForEvent());
+		benefit.discountByDayOfWeek(customer.getDate(), count);
+		benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
+		benefit.givePresent(counter.isSatisfiedForPresent());
+		benefit.giveBadge();
+		benefit.checkBeneficial(counter.isEnoughForEvent());
 	}
 	
 	public void showEventOrderResults() {
@@ -57,7 +58,7 @@ public class Service {
 		OutputView.printPresentMenu(counter.isSatisfiedForPresent());
 		OutputView.printBenefitDetails();
 		OutputView.printTotalDiscountAmount();
-		OutputView.printAmountForPayment(counter.howMuchForPayment());
+		OutputView.printAmountForPayment(counter.howMuchForPayment(benefit.howMuchDiscountAount()));
 		OutputView.printBadge(customer.getBadge());
 	}
 	
