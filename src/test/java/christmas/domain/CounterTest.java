@@ -52,14 +52,6 @@ class CounterTest {
 
         assertThat(result).containsAllEntriesOf(Orders2);
     }
-
-	@DisplayName("주문 목록을 확인한다.")
-    @Test
-    void getOrdersTest() {
-		Map<Menu, Integer> result = counter.getOrders();
-
-        assertThat(result).containsAllEntriesOf(Orders1);
-    }
 	
 	@DisplayName("날짜에 따라 할인되는 메뉴의 개수를 구한다.")
 	@CsvSource(value = {"2:1", "13:0"}, delimiter = ':')

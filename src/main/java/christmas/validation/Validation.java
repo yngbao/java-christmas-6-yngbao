@@ -12,11 +12,9 @@ import christmas.domain.MenuType;
 public class Validation {
 	
 	public static final int MAX_ORDER_COUNT = 20;
-	private static final int MENU_INDEX = 0;
-	private static final int COUNT_INDEX = 1;
-	private static final int COUNT_ONE = 1;
 	private static final int INDEX_ZERO = 0;
-	
+	private static final int INDEX_FIRST = 1;
+	private static final int COUNT_ONE = 1;
 	
 	public static void validateNotOnlyBeverage(List<MenuType> orderedMenu) {
 		List<MenuType> orderedMenuType = orderedMenu;
@@ -40,7 +38,7 @@ public class Validation {
 	
 	public static void validateOrderMenu(List<String[]> splitedInputs) {
         for (String[] splitedInput : splitedInputs) {
-        	if(!Arrays.stream(Menu.values()).anyMatch(menu -> menu.getViewName().equals(splitedInput[MENU_INDEX]))) {
+        	if(!Arrays.stream(Menu.values()).anyMatch(menu -> menu.getViewName().equals(splitedInput[INDEX_ZERO]))) {
         		throw new IllegalArgumentException();
         	}
         }
@@ -48,7 +46,7 @@ public class Validation {
 	
 	public static void validateMoreThanOneMenu(List<String[]> splitedInputs) {
         for (String[] splitedInput : splitedInputs) {
-        	if(Integer.valueOf(splitedInput[COUNT_INDEX]) < COUNT_ONE) {
+        	if(Integer.valueOf(splitedInput[INDEX_FIRST]) < COUNT_ONE) {
         		throw new IllegalArgumentException();
         	}
         }
@@ -57,7 +55,7 @@ public class Validation {
 	public static void validateDistinctOrder(List<String[]> splitedInputs) {
 		Set<String> menuInput = new HashSet<>();
 		for (String[] splitedInput : splitedInputs) {
-			menuInput.add(splitedInput[MENU_INDEX]);
+			menuInput.add(splitedInput[INDEX_ZERO]);
 		}
 		if(menuInput.size() != splitedInputs.size()) {
 			throw new IllegalArgumentException();

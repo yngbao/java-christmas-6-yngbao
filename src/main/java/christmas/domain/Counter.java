@@ -15,10 +15,9 @@ public class Counter {
 	private Map<MenuType, Integer> ordersType = new HashMap<>();
 	
 	public void initOrdersType() {
-		ordersType.put(MenuType.APPETIZER, ZERO_COUNT);
-		ordersType.put(MenuType.MAIN, ZERO_COUNT);
-		ordersType.put(MenuType.DESSERT, ZERO_COUNT);
-		ordersType.put(MenuType.BEVERAGE, ZERO_COUNT);
+		for(MenuType menuType : MenuType.values()) {
+			ordersType.put(menuType, ZERO_COUNT);
+		}
 	}
 	
 	public void initOrders() {

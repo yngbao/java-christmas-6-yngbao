@@ -30,7 +30,7 @@ public class Benefit {
 		return amount;
 	}
 	
-	public int howMuchDiscountAount() {
+	public int howMuchDiscountAmount() {
 		int amount = 0;
 		for(Event discount : benefitResult.keySet()) {
 			if (discount != Event.PRESENT) {
@@ -54,8 +54,7 @@ public class Benefit {
 	
 	public void discountByDayOfWeek(int date, int menuCount) {
 		Event discountType = weeklyDiscountType(Calendar.isWeekday(date));
-		int count = menuCount;
-		benefitResult.put(discountType, discountType.getAmount() * count);
+		benefitResult.put(discountType, discountType.getAmount() * menuCount);
 	}
 	
 	private Event weeklyDiscountType(boolean isWeekday) {
