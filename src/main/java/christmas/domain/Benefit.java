@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class Benefit {
 	
-	private Map<Event, Integer> discountResult = new HashMap<>();
+	private Map<Event, Integer> benefitResult = new HashMap<>();
 	
-	public Map<Event, Integer> getDiscountResult(){
-		return discountResult;
+	public Map<Event, Integer> getBenefitResult(){
+		return benefitResult;
 	}
 	
 	public void checkBeneficial(boolean isEnough) {
 		if(!isEnough) {
-			discountResult.clear();
+			benefitResult.clear();
 		}
 	}
 
@@ -24,17 +24,17 @@ public class Benefit {
 	
 	public int getTotalBenefitAmount() {
 		int amount = 0;
-		for(Event discount : discountResult.keySet()) {
-			amount += discountResult.get(discount);
+		for(Event discount : benefitResult.keySet()) {
+			amount += benefitResult.get(discount);
 		}
 		return amount;
 	}
 	
 	public int howMuchDiscountAount() {
 		int amount = 0;
-		for(Event discount : discountResult.keySet()) {
+		for(Event discount : benefitResult.keySet()) {
 			if (discount != Event.PRESENT) {
-				amount += discountResult.get(discount);
+				amount += benefitResult.get(discount);
 			}
 		}
 		return amount;
@@ -42,20 +42,20 @@ public class Benefit {
 	
 	public void givePresent(boolean isSatisfied) {
 		if (isSatisfied) {
-			discountResult.put(Event.PRESENT, Event.PRESENT.getAmount());
+			benefitResult.put(Event.PRESENT, Event.PRESENT.getAmount());
 		}
 	}
 	
 	public void discountForChristmas(int date) {
 		if(Calendar.isBeforeChristmas(date)) {
-			discountResult.put(Event.X_MAS_DISCOUNT, getDateDiscount(date));
+			benefitResult.put(Event.X_MAS_DISCOUNT, getDateDiscount(date));
 		}
 	}
 	
 	public void discountByDayOfWeek(int date, int menuCount) {
 		Event discountType = weeklyDiscountType(Calendar.isWeekday(date));
 		int count = menuCount;
-		discountResult.put(discountType, discountType.getAmount() * count);
+		benefitResult.put(discountType, discountType.getAmount() * count);
 	}
 	
 	private Event weeklyDiscountType(boolean isWeekday) {
@@ -67,7 +67,7 @@ public class Benefit {
 	
 	public void discountSpecially(boolean isSpecial) {
 		if (isSpecial) {
-			discountResult.put(Event.SPECIAL_DISCOUNT, Event.SPECIAL_DISCOUNT.getAmount());
+			benefitResult.put(Event.SPECIAL_DISCOUNT, Event.SPECIAL_DISCOUNT.getAmount());
 		}
 	}
 

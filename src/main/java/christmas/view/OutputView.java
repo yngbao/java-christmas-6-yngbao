@@ -39,19 +39,19 @@ public class OutputView {
 		System.out.println("\n<증정 메뉴>\n" + presentStatus(isSatisfied));
 	}
 	
-	public static void printBenefitDetails() {
+	public static void printBenefitDetails(Map<Event, Integer> benefitResult) {
 		System.out.println("\n<혜택 내역>");
-		for(Entry<Event, Integer> discount : Event.getDiscountResult().entrySet()) {
+		for(Entry<Event, Integer> discount : benefitResult.entrySet()) {
 			System.out.println(discount.getKey().getViewName()+": -"+formatter.format(discount.getValue()));
 		}
-		if (Event.getDiscountResult().size() == 0 ) {
+		if (benefitResult.size() == 0 ) {
 			System.out.println("없음");
 		}
 	}
 	
-	public static void printTotalDiscountAmount() {
+	public static void printTotalDiscountAmount(int amount) {
 		System.out.println("\n<총혜택 금액>\n"
-				+formatter.format(-Event.getTotalBenefitAmount()));
+				+formatter.format(-amount));
 	}
 	
 	public static void printAmountForPayment(int paymentAmount) {

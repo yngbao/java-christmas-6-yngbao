@@ -56,8 +56,8 @@ public class Service {
 		OutputView.printOrders(counter.getOrders());
 		OutputView.printTotalOrderAmount(counter.getTotalOrderAmount());
 		OutputView.printPresentMenu(counter.isSatisfiedForPresent());
-		OutputView.printBenefitDetails();
-		OutputView.printTotalDiscountAmount();
+		OutputView.printBenefitDetails(benefit.getBenefitResult());
+		OutputView.printTotalDiscountAmount(benefit.getTotalBenefitAmount());
 		OutputView.printAmountForPayment(counter.howMuchForPayment(benefit.howMuchDiscountAount()));
 		OutputView.printBadge(customer.getBadge());
 	}
