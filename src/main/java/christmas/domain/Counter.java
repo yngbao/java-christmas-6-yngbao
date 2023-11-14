@@ -45,18 +45,20 @@ public class Counter {
 	}
 	
 	public void takeOrders(Map<Menu, Integer> orders) {
+		initOrders();
+		initOrdersType();
 		storeOrder(orders);
 		for(Menu menu : orders.keySet()) {
 			storeOrderType(MenuType.findMenuType(menu), orders.get(menu));
 		}
 	}
 	
-	public void storeOrderType(MenuType menuType, int count) {
+	private void storeOrderType(MenuType menuType, int count) {
 		int totalCount = ordersType.get(menuType) + count;
 		ordersType.put(menuType, totalCount);
 	}
 	
-	public void storeOrder(Map<Menu, Integer> order) {
+	private void storeOrder(Map<Menu, Integer> order) {
 		orders.putAll(order);
 	}
 	

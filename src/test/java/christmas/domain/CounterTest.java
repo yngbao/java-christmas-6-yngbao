@@ -22,9 +22,9 @@ class CounterTest {
 
 	@DisplayName("주문된 메뉴를 주문 목록에 저장한다.")
     @Test
-    void storeOrderTest() {
+    void takeOrdersTest() {
 		Counter counter = new Counter();
-		counter.storeOrder(customerOrder);
+		counter.takeOrders(customerOrder);
 
         assertThat(counter.getOrders()).containsAllEntriesOf(customerOrder);
     }
@@ -33,7 +33,7 @@ class CounterTest {
     @Test
     void getTotalOrderAmount() {
 		Counter counter = new Counter();
-		counter.storeOrder(customerOrder);
+		counter.takeOrders(customerOrder);
         int result = counter.getTotalOrderAmount();
 
         assertThat(result).isEqualTo(56000);
