@@ -11,21 +11,22 @@ public class Customer {
 	
 	private static final int MENU_INDEX = 0;
 	private static final int COUNT_INDEX = 1;
+	
+	private String badge;
 	private int date;
 	private List<String[]> orders;
-	private static String badge;
 	
 	public void setDate(int date) {
 		Validation.validateDateInput(date);
 		this.date = date;
 	}
 	
-	public int getDate() {
-		return date;
-	}
-	
 	public void setOrders(String[] inputs) {
 		this.orders = validateOrders(inputs);
+	}
+	
+	public int getDate() {
+		return date;
 	}
 	
 	public Map<Menu, Integer> getOrders() {
@@ -37,8 +38,8 @@ public class Customer {
 		return formattedOrder;
 	}
 	
-	public static void setBadge(String badge) {
-		Customer.badge = badge;
+	public void setBadge(String badge) {
+		this.badge = badge;
 	}
 	
 	public String getBadge() {

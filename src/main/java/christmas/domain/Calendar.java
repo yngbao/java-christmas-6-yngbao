@@ -18,14 +18,10 @@ public class Calendar {
 	public static boolean isBeforeChristmas(int inputDate) {
 		return (inputDate >= FIRST_DATE && inputDate <= X_MAS);
 	}
-			
-	private static DayOfWeek findDayOfWeek(int month, int inputDate) {
-		LocalDate date = LocalDate.of(EVENT_YEAR, month, inputDate);
-		return date.getDayOfWeek();
-	}
 	
 	public static boolean isWeekday(int inputDate) {
 		DayOfWeek day = findDayOfWeek(EVENT_MONTH, inputDate);
+		
 		return Arrays.stream(WEEKDAY)
 				.anyMatch(dayOfWeek -> dayOfWeek == day);
 	}
@@ -33,11 +29,17 @@ public class Calendar {
 	public static boolean isSpecial(int Inputdate) {
 		boolean isSpecial = Arrays.stream(SPECIAL_DAY)
 				.anyMatch(day -> day == Inputdate);
+		
 		if (isSpecial) {
 			return true;
 		}
 		return false;
 	}
 	
+	private static DayOfWeek findDayOfWeek(int month, int inputDate) {
+		LocalDate date = LocalDate.of(EVENT_YEAR, month, inputDate);
+		
+		return date.getDayOfWeek();
+	}
 
 }

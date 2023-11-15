@@ -18,20 +18,21 @@ public enum Badge {
 		this.standardAmount = standardAmount;
 	}
 	
-	public String getViewName() {
-		return viewName;
-	}
-	
-	private int getStandardAmount() {
-		return standardAmount;
-	}
-	
 	public static String judgeBadge(int amount) {
 		Badge badge = Arrays.stream(Badge.values())
 				.filter(value -> (value.getStandardAmount() < amount))
 				.max(Comparator.comparing(Badge::getStandardAmount))
 				.orElse(NOTHING);
+		
 		return badge.getViewName();
+	}
+	
+	private String getViewName() {
+		return viewName;
+	}
+	
+	private int getStandardAmount() {
+		return standardAmount;
 	}
 
 }

@@ -16,11 +16,6 @@ public class Benefit {
 			benefitResult.clear();
 		}
 	}
-
-	public void giveBadge() {
-		String badge = Badge.judgeBadge(getTotalBenefitAmount());
-		Customer.setBadge(badge);
-	}
 	
 	public int getTotalBenefitAmount() {
 		int amount = 0;
@@ -57,17 +52,17 @@ public class Benefit {
 		benefitResult.put(discountType, discountType.getAmount() * menuCount);
 	}
 	
+	public void discountSpecially(boolean isSpecial) {
+		if (isSpecial) {
+			benefitResult.put(Event.SPECIAL_DISCOUNT, Event.SPECIAL_DISCOUNT.getAmount());
+		}
+	}
+	
 	private Event weeklyDiscountType(boolean isWeekday) {
 		if (isWeekday) {
 			return Event.WEEKDAY_DISCOUNT;
 		}
 		return Event.WEEKEND_DISCOUNT;
-	}
-	
-	public void discountSpecially(boolean isSpecial) {
-		if (isSpecial) {
-			benefitResult.put(Event.SPECIAL_DISCOUNT, Event.SPECIAL_DISCOUNT.getAmount());
-		}
 	}
 
 	private int getDateDiscount(int date) {

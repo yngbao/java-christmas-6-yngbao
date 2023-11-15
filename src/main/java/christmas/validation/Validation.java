@@ -68,6 +68,5 @@ public class Validation {
 			throw new IllegalArgumentException();
 		}
 	}
-	
 
 }

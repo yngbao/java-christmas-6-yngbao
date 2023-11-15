@@ -1,9 +1,9 @@
 package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -26,22 +26,6 @@ class CounterTest {
 		Orders2.put(Menu.RED_WINE, 1);
 		counter.takeOrders(Orders1);
 	}
-	
-	@DisplayName("주문목록의 총 개수를 구한다.")
-    @Test
-    void countOrderedMenuTest() {
-        int result = counter.howManyOrderedMenu();
-
-        assertThat(result).isEqualTo(2);
-    }
-	
-	@DisplayName("주문받은 메뉴타입들을 구한다.")
-    @Test
-    void findOrderedMenuTypeTest() {
-		List<MenuType> result = counter.findOrderedMenuType();
-
-        assertThat(result).containsOnly(MenuType.APPETIZER, MenuType.MAIN);
-    }
 	
 	@DisplayName("주문된 메뉴를 주문 목록에 저장한다.")
     @Test
@@ -89,6 +73,29 @@ class CounterTest {
         int result = counter.getTotalOrderAmount();
 
         assertThat(result).isEqualTo(43000);
+    }
+	
+	@DisplayName("음료만 주문한 경우 예외가 발생한다.")
+    @Test
+    void onlyBeverageTest() {
+		Counter counter3 = new Counter();
+		Map<Menu, Integer> order = new HashMap<>();
+		order.put(Menu.RED_WINE, 1);
+		order.put(Menu.ZERO_COKE, 2);
+		
+        assertThatThrownBy(() -> counter3.takeOrders(order))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+	
+	@DisplayName("총 주문 개수가 20개를 초과한 경우 예외가 발생한다.")
+    @Test
+    void tooMuchOrderTest() {
+		Counter counter4 = new Counter();
+		Map<Menu, Integer> order = new HashMap<>();
+		order.put(Menu.SEAFOOD_PASTA, 21);
+		
+        assertThatThrownBy(() -> counter4.takeOrders(order))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }

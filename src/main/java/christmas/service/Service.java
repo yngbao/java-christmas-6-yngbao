@@ -1,10 +1,10 @@
 package christmas.service;
 
+import christmas.domain.Badge;
 import christmas.domain.Benefit;
 import christmas.domain.Calendar;
 import christmas.domain.Counter;
 import christmas.domain.Customer;
-import christmas.validation.Validation;
 import christmas.view.ErrorView;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -17,6 +17,7 @@ public class Service {
 	
 	public void getInputDate() {
 		OutputView.printHello();
+		
 		while(true) {
 			try {
 				customer.setDate(InputView.readDate());
@@ -34,8 +35,6 @@ public class Service {
 			try {
 				customer.setOrders(InputView.readOrder());
 				counter.takeOrders(customer.getOrders());
-				Validation.validateNotOnlyBeverage(counter.findOrderedMenuType());
-				Validation.validateTotalMenuCount(counter.howManyOrderedMenu());
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println(ErrorView.ORDER_ERROR.getMessage());
@@ -49,8 +48,8 @@ public class Service {
 		benefit.discountByDayOfWeek(customer.getDate(), count);
 		benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
 		benefit.givePresent(counter.isSatisfiedForPresent());
-		benefit.giveBadge();
 		benefit.checkBeneficial(counter.isEnoughForEvent());
+		customer.setBadge(Badge.judgeBadge(benefit.getTotalBenefitAmount()));
 	}
 	
 	public void showEventOrderResults() {
@@ -63,5 +62,4 @@ public class Service {
 		OutputView.printAmountForPayment(counter.howMuchForPayment(benefit.howMuchDiscountAmount()));
 		OutputView.printBadge(customer.getBadge());
 	}
-	
 }
