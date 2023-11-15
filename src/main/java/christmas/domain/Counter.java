@@ -91,6 +91,7 @@ public class Counter {
 	}
 	
 	private List<MenuType> findOrderedMenuType(){
+		
 		return ordersType.entrySet().stream()
 				.filter(entry -> entry.getValue() != 0)
 				.map(Map.Entry::getKey)

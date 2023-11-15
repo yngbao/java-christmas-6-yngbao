@@ -67,6 +67,7 @@ public class Benefit {
 
 	private int getDateDiscount(int date) {
 		int more = Event.INCREASING.getAmount() * (date - Calendar.FIRST_DATE);
+		
 		return Event.X_MAS_DISCOUNT.getAmount() + more;
 	}
 }

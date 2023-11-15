@@ -26,14 +26,10 @@ public enum MenuType {
 	}
 	
 	public static MenuType findMenuType(Menu ordermenu) {
+		
 		return Stream.of(MenuType.values())
 				.filter(type -> hasMenu(type, ordermenu))
 				.findAny().get();
-	}
-	
-	private static boolean hasMenu(MenuType from, Menu ordermenu) {
-		return Stream.of(from.containMenu)
-				.anyMatch(containMenu -> containMenu == ordermenu);
 	}
 	
 	public static MenuType findDiscountMenuType(boolean isWeekday) {
@@ -41,6 +37,12 @@ public enum MenuType {
 			return DESSERT;
 		}
 		return MAIN;
+	}
+	
+	private static boolean hasMenu(MenuType from, Menu ordermenu) {
+		
+		return Stream.of(from.containMenu)
+				.anyMatch(containMenu -> containMenu == ordermenu);
 	}
 
 }

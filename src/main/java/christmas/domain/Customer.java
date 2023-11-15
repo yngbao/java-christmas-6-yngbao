@@ -31,6 +31,7 @@ public class Customer {
 	
 	public Map<Menu, Integer> getOrders() {
 		Map<Menu, Integer> formattedOrder = new HashMap<>();
+		
 		for(String[] inputOrder : orders) {
 			Menu orderMenu = Menu.findMenu(inputOrder[MENU_INDEX]);
 			formattedOrder.put(orderMenu, Integer.valueOf(inputOrder[COUNT_INDEX]));
@@ -48,10 +49,12 @@ public class Customer {
 	
 	private List<String[]> validateOrders(String[] inputs) {
 		Validation.validateMenuInputs(inputs);
+		
 		List<String[]> orders = Utils.splitStringsToList(inputs);
 		Validation.validateOrderMenu(orders);
 		Validation.validateMoreThanOneMenu(orders);
 		Validation.validateDistinctOrder(orders);
+		
 		return orders;
 	}
 

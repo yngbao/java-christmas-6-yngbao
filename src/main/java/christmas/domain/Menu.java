@@ -39,5 +39,4 @@ public enum Menu {
 		return price;
 	}
 	
-	
 }
