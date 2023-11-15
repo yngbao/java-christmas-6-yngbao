@@ -43,23 +43,23 @@ public class Service {
 	}
 	
 	public void applyBenefits() {
-		benefit.discountForChristmas(customer.getDate());
-		int count = counter.howManyDiscountMenu(customer.getDate());
-		benefit.discountByDayOfWeek(customer.getDate(), count);
-		benefit.discountSpecially(Calendar.isSpecial(customer.getDate()));
-		benefit.givePresent(counter.isSatisfiedForPresent());
-		benefit.checkBeneficial(counter.isEnoughForEvent());
-		customer.setBadge(Badge.judgeBadge(benefit.getTotalBenefitAmount()));
+		benefit.forChristmas(customer.getDate());
+		int count = counter.countDiscountMenu(customer.getDate());
+		benefit.byDayOfWeek(customer.getDate(), count);
+		benefit.forSpecialDay(Calendar.isSpecial(customer.getDate()));
+		benefit.givePresent(counter.isDeserved());
+		benefit.checkBeneficial(counter.isDiscountable());
+		customer.setBadge(Badge.judgeBadge(benefit.sumTotalAmount()));
 	}
 	
 	public void showEventOrderResults() {
 		OutputView.printPreviewIntro(customer.getDate());
 		OutputView.printOrders(counter.getOrders());
-		OutputView.printTotalOrderAmount(counter.getTotalOrderAmount());
-		OutputView.printPresentMenu(counter.isSatisfiedForPresent());
+		OutputView.printTotalOrderAmount(counter.sumTotalAmount());
+		OutputView.printPresentMenu(counter.isDeserved());
 		OutputView.printBenefitDetails(benefit.getBenefitResult());
-		OutputView.printTotalDiscountAmount(benefit.getTotalBenefitAmount());
-		OutputView.printAmountForPayment(counter.howMuchForPayment(benefit.howMuchDiscountAmount()));
+		OutputView.printTotalDiscountAmount(benefit.sumTotalAmount());
+		OutputView.printAmountForPayment(counter.howMuchPayment(benefit.sumOnlyDiscount()));
 		OutputView.printBadge(customer.getBadge());
 	}
 }

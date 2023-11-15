@@ -8,8 +8,8 @@ public class Controller {
 	
 	public void run() {
 		reservation();
-		checkEventBenefits();
-		reservationPreview();
+		checkBenefits();
+		resultPreview();
 	}
 	
 	private void reservation() {
@@ -17,11 +17,11 @@ public class Controller {
 		service.getInputOrder();
 	}
 	
-	private void checkEventBenefits() {
+	private void checkBenefits() {
 		service.applyBenefits();
 	}
 	
-	private void reservationPreview() {
+	private void resultPreview() {
 		service.showEventOrderResults();
 	}
 

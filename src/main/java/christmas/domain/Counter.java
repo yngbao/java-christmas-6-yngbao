@@ -15,11 +15,11 @@ public class Counter {
 	public static final Menu PRESENT = Menu.CHAMPAGNE;
 	
 	private Map<Menu, Integer> orders = new HashMap<>();
-	private Map<MenuType, Integer> ordersType = new HashMap<>();
+	private Map<MenuType, Integer> orderType = new HashMap<>();
 	
 	public void takeOrders(Map<Menu, Integer> orders) {
 		initOrders();
-		initOrdersType();
+		initOrderType();
 		storeOrder(orders);
 		
 		for(Menu menu : orders.keySet()) {
@@ -29,24 +29,24 @@ public class Counter {
 		validateTakenOrder();
 	}
 	
-	public int howMuchForPayment(int discountAmount) {
-		return getTotalOrderAmount() - discountAmount;
+	public int howMuchPayment(int discountAmount) {
+		return sumTotalAmount() - discountAmount;
 	}
 	
-	public int howManyDiscountMenu(int date) {
-		int count = ordersType.get(MenuType.findDiscountMenuType(Calendar.isWeekday(date)));
+	public int countDiscountMenu(int date) {
+		int count = orderType.get(MenuType.findDiscountableType(Calendar.isWeekday(date)));
 		return count;
 	}
 	
-	public boolean isEnoughForEvent() {
-		return getTotalOrderAmount() >= EVENT_CRITERIA;
+	public boolean isDiscountable() {
+		return sumTotalAmount() >= EVENT_CRITERIA;
 	}
 	
-	public boolean isSatisfiedForPresent() {
-		return getTotalOrderAmount() >= PRESENT_CRITERIA;
+	public boolean isDeserved() {
+		return sumTotalAmount() >= PRESENT_CRITERIA;
 	}
 	
-	public int getTotalOrderAmount() {
+	public int sumTotalAmount() {
 		int totalOrderAmount = 0;
 		for(Menu menu : orders.keySet()) {
 			totalOrderAmount += menu.getPrice() * orders.get(menu);
@@ -58,9 +58,9 @@ public class Counter {
 		return orders;
 	}
 	
-	private void initOrdersType() {
+	private void initOrderType() {
 		for(MenuType menuType : MenuType.values()) {
-			ordersType.put(menuType, ZERO_COUNT);
+			orderType.put(menuType, ZERO_COUNT);
 		}
 	}
 	
@@ -69,8 +69,8 @@ public class Counter {
 	}
 	
 	private void storeOrderType(MenuType menuType, int count) {
-		int totalCount = ordersType.get(menuType) + count;
-		ordersType.put(menuType, totalCount);
+		int totalCount = orderType.get(menuType) + count;
+		orderType.put(menuType, totalCount);
 	}
 	
 	private void storeOrder(Map<Menu, Integer> order) {
@@ -78,11 +78,11 @@ public class Counter {
 	}
 	
 	private void validateTakenOrder() {
-		Validation.validateNotOnlyBeverage(findOrderedMenuType());
-		Validation.validateTotalMenuCount(howManyOrderedMenu());
+		Validation.validateNotOnlyBeverage(findOrderedTypes());
+		Validation.validateTotalMenuCount(countOrderedMenu());
 	}
 	
-	private int howManyOrderedMenu() {
+	private int countOrderedMenu() {
 		int count = 0;
 		for(Menu menu : orders.keySet()) {
 			count += orders.get(menu);
@@ -90,9 +90,9 @@ public class Counter {
 		return count;
 	}
 	
-	private List<MenuType> findOrderedMenuType(){
+	private List<MenuType> findOrderedTypes(){
 		
-		return ordersType.entrySet().stream()
+		return orderType.entrySet().stream()
 				.filter(entry -> entry.getValue() != 0)
 				.map(Map.Entry::getKey)
 				.collect(Collectors.toList());

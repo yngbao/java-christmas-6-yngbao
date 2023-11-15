@@ -21,8 +21,8 @@ class BenefitTest {
 	@DisplayName("날짜가 1~25면 날짜별 할인혜택을 적용한다.")
     @Test
     void discountForChristmasTest() {
-		benefit.discountForChristmas(15);
-		benefit.discountForChristmas(26);
+		benefit.forChristmas(15);
+		benefit.forChristmas(26);
 
         assertThat(benefit.getBenefitResult()).contains(Map.entry(Event.X_MAS_DISCOUNT, 2400));
     }
@@ -30,7 +30,7 @@ class BenefitTest {
 	@DisplayName("날짜가 해당하는 요일할인 메뉴타입을 주문된 개수만큼 2023원씩 혜택 적용한다.")
     @Test
     void discountByDayOfWeekTest() {
-		benefit.discountByDayOfWeek(13, 3);
+		benefit.byDayOfWeek(13, 3);
 
         assertThat(benefit.getBenefitResult()).contains(Map.entry(Event.WEEKDAY_DISCOUNT, 6069));
     }
@@ -38,7 +38,7 @@ class BenefitTest {
 	@DisplayName("특별할인 대상 날짜인 경우 1000원 할인을 적용한다.")
     @Test
     void specialDiscountTest() {
-		benefit.discountSpecially(true);
+		benefit.forSpecialDay(true);
 
         assertThat(benefit.getBenefitResult()).contains(Map.entry(Event.SPECIAL_DISCOUNT, 1000));
     }
@@ -58,11 +58,11 @@ class BenefitTest {
 		
 		benefit.checkBeneficial(false);
 		benefit.givePresent(true);
-		benefit.discountForChristmas(date);
-		benefit.discountByDayOfWeek(date, 1);
-		benefit.discountSpecially(true);
+		benefit.forChristmas(date);
+		benefit.byDayOfWeek(date, 1);
+		benefit.forSpecialDay(true);
 
-        assertThat(benefit.getTotalBenefitAmount()).isEqualTo(29323);
+        assertThat(benefit.sumTotalAmount()).isEqualTo(29323);
     }
 	
 	@DisplayName("증정메뉴를 제외한 총 할인금액을 구한다.")
@@ -72,11 +72,11 @@ class BenefitTest {
 		
 		benefit.checkBeneficial(false);
 		benefit.givePresent(true);
-		benefit.discountForChristmas(date);
-		benefit.discountByDayOfWeek(date, 1);
-		benefit.discountSpecially(true);
+		benefit.forChristmas(date);
+		benefit.byDayOfWeek(date, 1);
+		benefit.forSpecialDay(true);
 
-        assertThat(benefit.howMuchDiscountAmount()).isEqualTo(4323);
+        assertThat(benefit.sumOnlyDiscount()).isEqualTo(4323);
     }
 
 }

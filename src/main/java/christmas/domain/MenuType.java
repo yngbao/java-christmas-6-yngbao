@@ -32,7 +32,7 @@ public enum MenuType {
 				.findAny().get();
 	}
 	
-	public static MenuType findDiscountMenuType(boolean isWeekday) {
+	public static MenuType findDiscountableType(boolean isWeekday) {
 		if(isWeekday) {
 			return DESSERT;
 		}

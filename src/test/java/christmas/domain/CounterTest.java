@@ -41,7 +41,7 @@ class CounterTest {
 	@CsvSource(value = {"2:1", "13:0"}, delimiter = ':')
     @ParameterizedTest
     void countDiscountMenuTest(Integer date, Integer expected) {
-		int actual = counter.howManyDiscountMenu(date);
+		int actual = counter.countDiscountMenu(date);
 		
         assertThat(actual).isEqualTo(expected);
     }
@@ -49,7 +49,7 @@ class CounterTest {
 	@DisplayName("총 주문금액이 1000원 이상인지 확인한다.")
     @Test
     void isEnoughForEventTest() {
-		boolean result = counter.isEnoughForEvent();
+		boolean result = counter.isDiscountable();
 
         assertThat(result).isTrue();
     }
@@ -60,8 +60,8 @@ class CounterTest {
 		Counter counter3 = new Counter();
 		counter3.takeOrders(Orders2);
 		
-		boolean result1 = counter.isSatisfiedForPresent();
-		boolean result2 = counter3.isSatisfiedForPresent();
+		boolean result1 = counter.isDeserved();
+		boolean result2 = counter3.isDeserved();
 
         assertThat(result1).isFalse();
         assertThat(result2).isTrue();
@@ -70,7 +70,7 @@ class CounterTest {
 	@DisplayName("주문목록의 총 합계금액을 구한다.")
     @Test
     void totalOrderAmountTest() {
-        int result = counter.getTotalOrderAmount();
+        int result = counter.sumTotalAmount();
 
         assertThat(result).isEqualTo(43000);
     }

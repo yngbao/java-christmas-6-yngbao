@@ -20,7 +20,7 @@ class MenuTypeTest {
 	@CsvSource(value = {"true:DESSERT", "false:MAIN"}, delimiter = ':')
     @ParameterizedTest
     void findDiscountMenuTypeTest(boolean isWeekday, MenuType expected) {
-		MenuType actual = MenuType.findDiscountMenuType(isWeekday);
+		MenuType actual = MenuType.findDiscountableType(isWeekday);
 		
         assertThat(actual).isEqualTo(expected);
     }
